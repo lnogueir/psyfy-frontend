@@ -1,0 +1,252 @@
+*{
+  font-family:avenir
+}
+
+body {
+    padding-top: 165px;
+}
+
+.center{
+  align-items: center;
+}
+
+.align-vertical{
+   vertical-align: middle;
+   line-height:30px;
+   padding-top:10px
+
+}
+
+.inline-block{
+  display:inline-block;
+}
+
+.bg-psyfy-page-title{
+  background-color:#c878fa;
+}
+
+.bg-psyfy-navbar{
+  background-color: #9d05f0;
+}
+
+.bg-psyfy-footer{
+  background-color: #9875d1;
+}
+
+.bg-psyfy-body{
+  background-color: white;
+}
+
+.text-bold-white{
+  font-weight:700;
+  color:white;
+}
+
+
+.bg-white-on-hover:hover{
+  background-color:white;
+}
+
+.text-bold-black{
+  font-weight:700;
+  color:black;
+}
+
+.fs15{
+  font-size:15px;
+}
+
+.fs20{
+  font-size:20px;
+}
+
+.border-5-black{
+  border-width:5px !important;
+  border-color:black !important;
+}
+
+.border-3-black{
+  border-width:3px !important;
+  border-color:black !important;
+}
+
+#therapist-card{
+  margin-top:5px;
+  width: 22rem;
+}
+
+#therapist-card img{
+  max-width: 100%;
+  max-height: 100%;
+  height:322px
+}
+
+
+.border-2-black{
+  border-width:2px !important;
+  border-color:black !important;
+}
+
+.border-5{
+  border-width:5px !important;
+  border-color:white !important;
+}
+
+.border-3{
+  border-width:3px !important;
+  border-color:white !important;
+}
+
+.border-2{
+  border-width:2px !important;
+  border-color:white !important;
+}
+
+a {
+    text-decoration: none !important;
+}
+
+.m20{
+  margin:20px;
+}
+
+.m5{
+  margin:5px;
+}
+
+.m10{
+  margin:10px;
+}
+.mt10{
+  margin-top:10px;
+}
+.mt20{
+  margin-top:20px;
+}
+.mt30{
+  margin-top:30px;
+}
+
+.mb10{
+  margin-bottom:10px;
+}
+
+.mb20{
+  margin-bottom:20px;
+}
+
+.mb30{
+  margin-bottom:30px;
+}
+
+.mb40{
+  margin-bottom:40px;
+}
+
+
+
+
+.pr10{
+  padding-right:10px;
+}
+
+.p5{
+  padding:5px;
+}
+
+.p6{
+  padding:6px;
+}
+
+.p10{
+  padding:10px;
+}
+
+.p15{
+  padding:15px;
+}
+
+.p20{
+  padding:20px;
+}
+.p30{
+  padding:30px;
+}
+
+.pt5{
+  padding-top:5px;
+}
+
+.pt10{
+  padding-top: 10px;
+}
+
+.pt15{
+  padding-top: 15px;
+}
+
+.pt20{
+  padding-top: 20px;
+}
+.pt30{
+  padding-top: 30px;
+}
+.pb5{
+  padding-bottom:5px;
+}
+
+.pb10{
+  padding-bottom:10px;
+}
+
+.pb20{
+  padding-bottom:20px;
+}
+.pb30{
+  padding-bottom:30px;
+}
+
+.w200{
+  width:200px
+}
+
+.pointer{
+  cursor:pointer;
+}
+
+input[type="file"] {
+    display: none;
+}
+
+
+#toggle-button{
+  background-color: white;
+}
+
+#toggle-button:focus,#toggle-button:active {
+  outline: none !important;
+  box-shadow: none;
+}
+
+#toggle-button:hover{
+  background-color: lightgray;
+}
+
+#display-right-for-40 {
+  display: block;
+}
+
+
+#hide-left-for-40{
+  display: none;
+}
+
+@media only screen and (max-width: 48em) {
+      #display-right-for-40 {
+        display: none;
+      }
+
+      #hide-left-for-40{
+        display: block;
+      }
+  }
