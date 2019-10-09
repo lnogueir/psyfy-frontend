@@ -9,7 +9,7 @@ function Header(props){
         name={props.name}
         image_src={props.image_src}
       />
-      <PageTitle />
+      <PageTitle page_title={props.page_title}/>
     </div>
   )
 }

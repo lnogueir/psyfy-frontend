@@ -2,19 +2,59 @@
   font-family:avenir
 }
 
+
 body {
     padding-top: 165px;
 }
 
-.center{
-  align-items: center;
+.float-left{
+  float:left;
 }
 
-.align-vertical{
+.float-right{
+  float:right;
+}
+
+.float-center{
+  float:center;
+}
+
+.fweight-700{
+  font-weight: 700;
+}
+
+.fweight-500{
+  font-weight: 500;
+}
+
+.center{
+  align-items: center;
+  text-align:center;
+}
+
+.align-vertical-10{
    vertical-align: middle;
    line-height:30px;
    padding-top:10px
+}
 
+
+.align-vertical-2{
+  vertical-align: middle;
+  line-height:23px;
+  padding-top:2px
+}
+
+.align-vertical-5{
+  vertical-align: middle;
+  line-height:30px;
+  padding-top:5px
+}
+
+.align-vertical-6{
+  vertical-align: middle;
+  line-height:30px;
+  padding-top:6px
 }
 
 .inline-block{
@@ -51,6 +91,9 @@ body {
   font-weight:700;
   color:black;
 }
+.fs12{
+  font-size:12px;
+}
 
 .fs15{
   font-size:15px;
@@ -60,46 +103,161 @@ body {
   font-size:20px;
 }
 
-.border-5-black{
-  border-width:5px !important;
-  border-color:black !important;
+.align-text-right{
+  text-align:right;
 }
 
-.border-3-black{
-  border-width:3px !important;
-  border-color:black !important;
+.align-text-left{
+  text-align:left;
 }
+
+.align-text-center{
+  text-align:center;
+}
+
+
+.camera-icon{
+  font-size:100px;
+  cursor:pointer;
+  padding:15px;
+  border-radius: 55%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.thumbsup-icon{
+  font-size:65px;
+  color:#e67575;
+  cursor:pointer;
+  padding:15px;
+  border-radius: 55%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
+.thumbsdown-icon{
+  font-size:70px;
+  color:#4298f5;
+  cursor:pointer;
+  padding:15px;
+  border-radius: 55%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
+}
+
 
 #therapist-card{
-  margin-top:5px;
-  width: 22rem;
+  max-width: 16em;
+  height:265px;
+  /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2), 0 1px 2px 0 rgba(0, 0, 0, 0.19);
+  background-color:"#f5f2f5";
+  border-style:"ridge";
+  min-width: 16em;
+}
+
+#therapist-card-v2{
+  width: 16em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color:"#f5f2f5";
+  border-style:"ridge";
+}
+
+.bt{
+  border-top:1px solid lightgray;
+}
+
+.bb{
+  border-bottom:1px solid lightgray;
+}
+
+.scrollbox {
+  overflow-y: auto;
+  max-height: 10em;
+  background: /* Shadow covers */
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+  radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background: /* Shadow covers */
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+  radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+
+#therapist-card:hover img{
+  opacity: 0.3;
+}
+
+#therapist-card:hover .hover-img{
+  opacity: 1;
 }
 
 #therapist-card img{
   max-width: 100%;
   max-height: 100%;
-  height:322px
+  height:325px;
+  opacity: 1;
+  display: block;
+  transition: .5s ease;
+  backface-visibility: hidden;
 }
 
+.box-shadow{
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.1);
+}
+
+.hover-img {
+  transition: .5s ease;
+  opacity: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%)
+}
+
+.border-bottom{
+  border-bottom:1px solid black;
+}
+
+.border-top{
+  border-top:1px solid black;
+}
+
+.border-5-black{
+  border-width:5px !important;
+  border-color:black !important;
+  border-style: solid;
+}
+
+.border-3-black{
+  border-width:3px !important;
+  border-color:black !important;
+  border-style: solid;
+}
 
 .border-2-black{
   border-width:2px !important;
   border-color:black !important;
+  border-style: solid;
 }
 
 .border-5{
   border-width:5px !important;
   border-color:white !important;
+  border-style: solid;
 }
 
 .border-3{
   border-width:3px !important;
   border-color:white !important;
+  border-style: solid;
 }
 
 .border-2{
   border-width:2px !important;
   border-color:white !important;
+  border-style: solid;
 }
 
 a {
@@ -117,14 +275,81 @@ a {
 .m10{
   margin:10px;
 }
+
+.m30{
+  margin:30px;
+}
+.m40{
+  margin:40px;
+}
+.m50{
+  margin:50px;
+}
+
+
+.mr5{
+  margin-right:5px;
+}
+
+.mr10{
+  margin-right:10px;
+}
+
+
+.mr20{
+  margin-right:20px;
+}
+
+
+.mr30{
+  margin-right:30px;
+}
+
+.ml5{
+  margin-left:5px;
+}
+
+.ml10{
+  margin-left:10px;
+}
+
+.ml20{
+  margin-left:20px;
+}
+
+.ml30{
+  margin-left:30px;
+}
+
 .mt10{
   margin-top:10px;
 }
+
+.mt15{
+  margin-top:15px;
+}
+
+.mt16{
+  margin-top:16px;
+}
+
 .mt20{
   margin-top:20px;
 }
+.mt25{
+  margin-top:25px;
+}
+
+.mt26{
+  margin-top:26px;
+}
+
 .mt30{
   margin-top:30px;
+}
+
+.mt60{
+  margin-top:60px;
 }
 
 .mb10{
@@ -150,6 +375,22 @@ a {
   padding-right:10px;
 }
 
+.pr20{
+  padding-right:20px;
+}
+
+.p1{
+  padding:1px;
+}
+
+
+.p2{
+  padding:2px;
+}
+.p3{
+  padding:3px;
+}
+
 .p5{
   padding:5px;
 }
@@ -171,6 +412,20 @@ a {
 }
 .p30{
   padding:30px;
+}
+.pr5{
+  padding-right:5px;
+}
+
+.pl5{
+  padding-left:5px;
+}
+
+.pl10{
+  padding-left:10px;
+}
+.pl20{
+  padding-left:20px;
 }
 
 .pt5{
@@ -206,8 +461,49 @@ a {
   padding-bottom:30px;
 }
 
+.pb40{
+  padding-bottom:40px;
+}
+
+.pb45{
+  padding-bottom:45px;
+}
+
+.w150{
+  width:150px
+}
+
+.justify-between{
+  display:flex;
+  justify-content: space-between;
+}
+
+.justify-evenly{
+  display:flex;
+  justify-content: space-evenly;
+}
+
 .w200{
   width:200px
+}
+
+.w100c{
+  width:'100%';
+}
+
+.w50c{
+  width:'50%';
+}
+
+.w60c{
+  width:'60%';
+}
+
+.w80c{
+  width:'80%';
+}
+.w70c{
+  width:'70%';
 }
 
 .pointer{
@@ -216,6 +512,15 @@ a {
 
 input[type="file"] {
     display: none;
+}
+
+.hidden{
+  display:none;
+}
+
+.autocomplete-dropdown-container{
+  padding:5px;
+  border: 1px solid lightblue;
 }
 
 
@@ -241,6 +546,7 @@ input[type="file"] {
   display: none;
 }
 
+
 @media only screen and (max-width: 48em) {
       #display-right-for-40 {
         display: none;
@@ -250,3 +556,84 @@ input[type="file"] {
         display: block;
       }
   }
+
+@media only screen and (max-width: 75em) {
+  .w200.shrink{
+    width:160px;
+  }
+}
+
+
+
+@media only screen and (max-width:61.95em){
+  .top{
+    order:1;
+  }
+
+  .bot{
+    order:2;
+  }
+}
+
+.align-responsive{
+  text-align:left;
+}
+
+@media only screen and (max-width:47.9em){
+  .top{
+    order:2;
+  }
+
+  .bot{
+    order:1;
+  }
+
+  .align-responsive{
+    text-align:center;
+  }
+}
+
+#overview-preview-card{
+  width:35rem;
+}
+
+@media only screen and (max-width:39em){
+  #therapist-card{
+    display:none;
+  }
+  #overview-preview-card{
+    width:100em;
+  }
+
+}
+
+.overview-section-title{
+  height:50px;
+  border-bottom:1px solid lightgray;
+}
+
+.search-preview-wrap{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  width:"100%";
+}
+
+.overlay {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+}
