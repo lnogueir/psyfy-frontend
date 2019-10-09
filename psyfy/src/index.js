@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import OverviewPage from './pages/therapist/OverviewPage'
+import OverviewPage from './pages/therapist/OverviewPage';
 import * as serviceWorker from './serviceWorker';
 
 
