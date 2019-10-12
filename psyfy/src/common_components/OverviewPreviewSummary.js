@@ -1,10 +1,9 @@
 import React from 'react'
 import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
 
 function OverviewPreviewSummary(props){
   return(
-    <Card style={{width:'51em'}}>
+    <Card style={{width:'55em'}}>
       <Card.Header as="h5">Summary</Card.Header>
       <Card.Body>
         <blockquote className="blockquote mb-0">

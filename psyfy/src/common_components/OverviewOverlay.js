@@ -2,12 +2,18 @@ import React from 'react'
 
 
 function OverviewOverlay(props){
-    console.log(props)
+    const childrenWithProps = React.Children.map(props.children, child =>
+      React.cloneElement(child, { toggleShouldDisplay: props.toggleShouldDisplay })
+    );
     return(
-      <div style={{height:props.should_display?"100%":"0"}} className="overlay">
-        <div className="overlay-content">
-            <button>Caralho em </button>
-        </div>
+      <div
+        style={{height:props.should_display?"100%":"0%"}}
+        onClick={props.toggleShouldDisplay}
+        className="overlay"
+      >
+        <div onClick={(e)=>e.stopPropagation()} className="overlay-content">
+            {childrenWithProps}
+         </div>
       </div>
   )
 }
