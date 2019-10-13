@@ -133,6 +133,14 @@ body {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.19);
 }
 
+.general-edit-icon {
+  cursor:pointer;
+}
+
+.general-edit-icon:hover {
+  color:#4d7be8;
+}
+
 .thumbsdown-icon{
   font-size:65px;
   color:#4298f5;
@@ -738,4 +746,46 @@ input[type="file"] {
 .question-mark{
   padding-bottom:8px;
   cursor:pointer;
+}
+
+[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: #555;
+}
+
+#summary-box:focus{
+  outline: none !important;
+  border:1px solid lightgray;
+  box-shadow: 0 0 10px #719ECE;
+}
+
+input{
+  outline: none;
+}
+
+#youtube-url-input{
+  box-shadow: 0 0 7px gray;
+  border:1px solid lightgray;
+  margin-bottom:1px;
+}
+
+.elementToFadeInAndOut {
+    width:150px;
+    height:45px;
+    -webkit-animation: fadeinout 4s linear forwards;
+    animation: fadeinout 4s linear forwards;
+    opacity: 0;
+}
+
+@-webkit-keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+@keyframes fadeinout {
+  50% { opacity: 1; }
+}
+
+.block-horizontal-scroll{
+  max-width: 100%;
+  overflow-x: hidden;
 }

@@ -3,16 +3,15 @@ import '../../assets/common_style.css';
 import Footer from '../../common_components/Footer';
 import Header from '../../common_components/Header';
 import OverviewPreview from '../../common_components/OverviewPreview';
-import LoggedInPage from '../../common_components/LoggedInPage'
+import Page from '../../common_components/Page'
 import OverviewTrailer from '../../common_components/OverviewTrailer'
 
 
-class OverviewPage extends LoggedInPage{
+class OverviewPage extends Page{
   constructor(){
     super("Therapist Overview", "Lucas Nogueira", null);
     this.state = {
-      // page_title: "Therapist Overview",
-      // image_src: null,
+
     }
   }
 
@@ -29,6 +28,7 @@ class OverviewPage extends LoggedInPage{
           <div className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
             <section>
               <OverviewPreview
+                is_therapist={this.is_therapist}
                 handlePageTitleUpdate={this.handlePageTitleUpdate}
                 handleImageSrc={this.handleImageSrc}
                 image_src={this.image_src}
@@ -37,7 +37,9 @@ class OverviewPage extends LoggedInPage{
           </div>
           <div className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap" align="center">
             <section>
-              <OverviewTrailer />
+              <OverviewTrailer
+                is_therapist={this.is_therapist}
+              />
             </section>
           </div>
         </div>
