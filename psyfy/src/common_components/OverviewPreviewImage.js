@@ -24,7 +24,7 @@ class TherapistOverviewPreviewImage extends React.Component{
   }
 
   handleSaveImage = () => {
-    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${4}/uploadProfileImage`
+    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${5}/uploadProfileImage`
     this.setState({is_loading:true})
     var form = new FormData();
     form.append("req", this.state.selectedFile)
@@ -34,7 +34,7 @@ class TherapistOverviewPreviewImage extends React.Component{
         body: form,
         cache: 'no-cache',
         headers:{
-          "Authorization": "EvVH23vJsuhrW3PLDuPB3y0ac6lAzrVOgNIB31OQx1RY3CuougdsmHkJg0evxMtN"
+          "Authorization": "GKLJulXBCcxvwfRTDzb5dB7X6KCBgVh1B1BeCX0BqiUNzJFViAch74K28kggGsk9"
         }
       })
       .then(response=>response.json())
@@ -68,7 +68,7 @@ class TherapistOverviewPreviewImage extends React.Component{
                   !this.state.is_loading
                   ?
                   <div align="center">
-                    <h3 style={{fontWeight:700}}>Confirm?</h3>
+                    <h3 style={{fontWeight:500}}>Confirm?</h3>
                     <div className="justify-around mt40">
                         <FontAwesomeIcon
                           onClick={()=>this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))}

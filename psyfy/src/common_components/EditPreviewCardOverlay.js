@@ -25,7 +25,7 @@ function EditPreviewCardOverlay(props){
                number={props.number}
                address={props.address}
                contact_email={props.contact_email}
-               handleChangeProp={props.handleChangehandleChangeProp}
+               handleChangeProp={props.handleChangeProp}
              />
            </div>
            <div className="col-xs-12 col-md-12 col-lg-12">
@@ -33,11 +33,11 @@ function EditPreviewCardOverlay(props){
            </div>
            <div className="col-xs-12 col-md-12 col-lg-12">
              <EditPreviewCardOverlayQualification
-               name={props.name}
-               number={props.number}
-               address={props.address}
-               contact_email={props.contact_email}
-               handleChangeProp={props.handleChangehandleChangeProp}
+               education={props.education}
+               specialization={props.specialization}
+               certification={props.certification}
+               experience={props.experience}
+               handleChangeProp={props.handleChangeProp}
              />
            </div>
          </div>

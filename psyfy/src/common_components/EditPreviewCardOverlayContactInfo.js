@@ -6,17 +6,58 @@ import Tooltip from 'react-bootstrap/Tooltip'
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin, faEnvelope, faUserMd, faAddressBook } from '@fortawesome/free-solid-svg-icons'
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import AutocompleteInput from './AutocompleteInput'
+import { geocodeByAddress , getLatLng } from 'react-places-autocomplete';
 
 
 class EditPreviewCardOverlayContactInfo extends React.Component{
   constructor(){
     super()
-    this.show_tooltip=false
+    this.show_tooltip=false;
+    this.state = {
+      is_updating: false
+    }
   }
+
+
+  componentDidMount = () => {
+    this.name = this.props.name
+    this.email = this.props.email
+    this.number = this.props.number
+    this.address = this.props.address
+
+  }
+
+
+  handleUpdate = (event) => {
+    event.preventDefault();
+    const address = event.target.elements.clinicAdress.value;
+    let data = {
+      full_name: event.target.elements.fullName.value,
+      address: address,
+      phone_number: event.target.elements.phoneNumber.value,
+      contact_email: event.target.elements.contact_email.value,
+    }
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/5/contactInformation`
+        data.location = latLng
+        fetch(url, {
+          method:'PUT',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': "GKLJulXBCcxvwfRTDzb5dB7X6KCBgVh1B1BeCX0BqiUNzJFViAch74K28kggGsk9"
+          }
+        })
+        .then(response=>response.json())
+        .then(responseJson=>console.log(responseJson))
+      })
+      .catch(error => console.error('Error', error));
+
+  }
+
 
   handleEmailTooltip = () => {
     if(this.show_tooltip){
@@ -30,7 +71,7 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
 
   render(){
     return (
-      <Form>
+      <Form onSubmit={this.handleUpdate}>
         <h3>{"Contact Info:"}</h3>
         <div className="row">
           <div className="col-xs-6 col-md-6 col-lg-6">
@@ -93,7 +134,7 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                     </ButtonToolbar>
                   </div>
                 </Form.Label>
-              <Form.Control name="email" onChange={e=>this.props.handleChangeProp('contact_email',e.target.value)} type="email" placeholder="Your email" value={this.props.contact_email}/>
+              <Form.Control name="contact_email" onChange={e=>this.props.handleChangeProp('contact_email',e.target.value)} type="email" placeholder="Your email" value={this.props.contact_email}/>
             </Form.Group>
           </div>
           <div className="col-xs-12 col-lg-6">
@@ -103,62 +144,15 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                 &nbsp;&nbsp;&nbsp;
                 <b>Clinic Address</b>
               </Form.Label>
-                {
-                <PlacesAutocomplete
-                  value={this.props.address}
-                  onSelect={this.handleSelect}
-                  onChange={input=>this.props.handleChangeProp('clinic_address',input)}
-                >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                  <div>
-                    <Form.Control
-                      name="clinicAdress"
-                      value={this.props.address}
-                      {...getInputProps({
-                        placeholder:"1234 Main St",
-                        className: 'location-search-input',
-                      })}
-                    />
-                    <div className={`autocomplete-dropdown-container${suggestions.length===0?" hidden":""}`}>
-                      {loading && <div>Loading...</div>}
-                      {suggestions.map(suggestion => {
-                        const className = suggestion.active
-                          ? 'suggestion-item--active'
-                          : 'suggestion-item';
-                        const style = suggestion.active
-                          ? { backgroundColor: '#cde9f7', cursor: 'pointer', padding:10 }
-                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                        return (
-                          <div
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style,
-                            })}
-                          >
-                            <div
-                              onClick={()=>{
-                                this.setState({address:suggestion.description, address_id: suggestion.placeId})
-                              }}
-                              >
-                              <span>{suggestion.description}</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-            }
+              <AutocompleteInput
+                updateLatLng={this.updateLatLng}
+                address={this.props.address}
+                handleChangeProp={this.props.handleChangeProp}
+              />
             </Form.Group>
           </div>
         </div>
-        <div className="justify-between">
-          <Button id="update-contact-button" className="w200" variant="info">Update Contact</Button>
-          <Form.Group id="formGridCheckbox">
-            <Form.Check name="allowPatientToViewContact" type="checkbox" label="Allow patient to view my contact information" />
-          </Form.Group>
-        </div>
+        <input type="submit" id="update-contact-button" value={"Update"} className="w200 btn btn-outline-primary"/>
       </Form>
     )
   }

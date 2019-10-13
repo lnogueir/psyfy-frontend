@@ -1,8 +1,9 @@
 import React from 'react'
 
-class LoggedInPage extends React.Component {
+class Page extends React.Component {
   constructor(page_title, loggedUserName, image_src){
       super()
+      this.is_therapist = true 
       this.page_title = page_title
       this.user_name = loggedUserName
       this.image_src = image_src
@@ -33,4 +34,4 @@ class LoggedInPage extends React.Component {
 
 }
 
-export default LoggedInPage;
+export default Page;

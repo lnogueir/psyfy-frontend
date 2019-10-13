@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 function OverviewOverlay(props){
     const childrenWithProps = React.Children.map(props.children, child =>
       React.cloneElement(child, { toggleShouldDisplay: props.toggleShouldDisplay })
@@ -13,7 +12,7 @@ function OverviewOverlay(props){
       >
         <div onClick={(e)=>e.stopPropagation()} className="overlay-content">
             {childrenWithProps}
-         </div>
+        </div>
       </div>
   )
 }

@@ -1,22 +1,38 @@
-import React from 'react'
-import Card from 'react-bootstrap/Card'
-import Button from 'react-bootstrap/Button'
-import EditPreviewCardOverlay from './EditPreviewCardOverlay'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faMapPin, faPencilAlt } from '@fortawesome/free-solid-svg-icons'
-import OverviewOverlay from './OverviewOverlay'
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Button from 'react-bootstrap/Button';
+import EditPreviewCardOverlay from './EditPreviewCardOverlay';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMapPin } from '@fortawesome/free-solid-svg-icons';
+import GeneralEditIcon from './GeneralEditIcon';
+import OverviewOverlay from './OverviewOverlay';
 
 class OverviewPreviewCard extends React.Component{
   constructor(){
     super()
     this.should_display_edit=false
     this.state={
-      is_therapist: true, // colocar isso no overview page
       name: "Lucas Nogueira" ,
       contact_email: "jawy2@uwaterloo.ca",
       number: "226 978 5884",
       clinic_address: "386 Beechdrops Dr",
+      education: "Bachelor of Psycology",
+      specialization: "Psychodynamics",
+      certification: "Therapist Certify",
+      experience: "8 years"
     }
+  }
+
+
+  componentDidMount = () => {
+    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/5?filter[include]=contactInformation&filter[include]=media&filter[include]=education`
+    fetch(url,{
+      headers:{
+        'Content-Type': 'application/json',
+        'Authorization': "GKLJulXBCcxvwfRTDzb5dB7X6KCBgVh1B1BeCX0BqiUNzJFViAch74K28kggGsk9"
+      }})
+      .then(response=>response.json())
+      .then(responseJson=>console.log(responseJson))
   }
 
   toggleShouldDisplay = () =>{
@@ -46,6 +62,10 @@ class OverviewPreviewCard extends React.Component{
               number={this.state.number}
               address={this.state.clinic_address}
               contact_email={this.state.contact_email}
+              education={this.state.education}
+              specialization={this.state.specialization}
+              certification={this.state.certification}
+              experience={this.state.experience}
               handleChangeProp={this.handleChangeState}
            />
         </OverviewOverlay>
@@ -53,13 +73,11 @@ class OverviewPreviewCard extends React.Component{
           <Card.Header as="h4">
             Lucas Nogueira
             {
-              this.state.is_therapist?
-              <FontAwesomeIcon
-                className="float-right pointer fs20"
-                icon={faPencilAlt}
+              this.props.is_therapist &&
+              <GeneralEditIcon
+                is_edit={false}
                 onClick={this.toggleShouldDisplay}
               />
-              :null
             }
           </Card.Header>
           <Card.Body>
