@@ -1,13 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-<<<<<<< HEAD
 import OverviewPage from './pages/therapist/OverviewPage';
-=======
-import OverviewPage from './pages/therapist/OverviewPage'
-import TherapistForm from './pages/therapist/TherapistForm'
-import TestPage from './pages/public/LoginCardPage'
->>>>>>> fazendo mudancas no  login
+import TestPage from './pages/public/TestPage';
+import TherapistForm from './pages/therapist/TherapistForm';
+
 import * as serviceWorker from './serviceWorker';
 
 
