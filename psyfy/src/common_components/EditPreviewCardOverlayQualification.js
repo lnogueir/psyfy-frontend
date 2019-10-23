@@ -1,31 +1,33 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faLightbulb, faCertificate, faGraduationCap } from '@fortawesome/free-solid-svg-icons'
-
+import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
 
 class EditPreviewCardOverlayQualification extends React.Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       is_updating: false
     }
   }
 
+  updateFields = () =>{
+    this.education = this.props.fields.degree
+    this.certification = this.props.fields.certification_license
+    this.specialization = this.props.fields.specialize
+    this.experience = this.props.fields.years_of_experience
+  }
 
   componentDidMount = () => {
-    this.education = this.props.education
-    this.certification = this.props.certification
-    this.specialization = this.props.specialization
-    this.experience = this.props.experience
+    this.updateFields()
   }
 
   isUpdating = () => {
-     return (this.education!==this.props.education ||
-      this.certification!==this.props.certification ||
-      this.specialization!==this.props.specialization ||
-      this.experience!==this.props.experience)
+     return (this.education!==this.props.fields.degree ||
+      this.certification!==this.props.fields.certification_license ||
+      this.specialization!==this.props.fields.specialize ||
+      this.experience!==this.props.fields.years_of_experience)
   }
 
 
@@ -37,27 +39,34 @@ class EditPreviewCardOverlayQualification extends React.Component{
       certification_license: event.target.elements.certification.value,
       years_of_experience: event.target.elements.experience.value,
     }
-    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/5/education`
+    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
+    const loggedUser = JSON.parse(correct_storage)
+    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/education`
     fetch(url, {
       method:'PUT',
       body: JSON.stringify(data),
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': "GKLJulXBCcxvwfRTDzb5dB7X6KCBgVh1B1BeCX0BqiUNzJFViAch74K28kggGsk9"
+        'Authorization': loggedUser.token
       }
     })
-    .then(response=>response.json())
-    .then(responseJson=>console.log(responseJson))
-  .catch(error => console.error('Error', error));
+    .then(response=>{
+      console.log(response)
+      if( response.status===200){
+        this.updateFields()
+        this.forceUpdate()
+      }
+    })
+    .catch(error => console.error('Error', error));
   }
 
   render(){
     return (
       <Form onSubmit={this.handleUpdate}>
-        <div className="justify-start">
-          <h3>{`${this.isUpdating()?"*":""}Qualification Info:`}</h3>
-          <input style={{display:this.isUpdating()?"block":"none"}} type="submit" id="update-contact-button" value={"Update"} className="w150 btn btn-outline-primary elementToFadeInAndOut"/>
-        </div>
+        <EditPreviewCardOverlayTitle
+          isUpdating={this.isUpdating}
+          title={"Qualification Info"}
+        />
         <div className="row">
           <div className="col-xs-6 col-md-6 col-lg-6">
             <Form.Group controlId="formGridEducation">
@@ -68,9 +77,9 @@ class EditPreviewCardOverlayQualification extends React.Component{
                 </Form.Label>
               <Form.Control
                 name="education"
-                onChange={e=>this.props.handleChangeProp('education',e.target.value)}
+                onChange={e=>this.props.onFieldUpdate('degree',e.target.value)}
                 placeholder="e.g Bachelor of Psycology"
-                value={this.props.education}
+                value={this.props.fields.degree}
               />
             </Form.Group>
           </div>
@@ -83,9 +92,9 @@ class EditPreviewCardOverlayQualification extends React.Component{
               </Form.Label>
               <Form.Control
                 name="certification"
-                onChange={e=>this.props.handleChangeProp('certification',e.target.value)}
+                onChange={e=>this.props.onFieldUpdate('certification_license',e.target.value)}
                 placeholder="Therapist Licensure"
-                value={this.props.certification}
+                value={this.props.fields.certification_license}
               />
             </Form.Group>
           </div>
@@ -100,9 +109,9 @@ class EditPreviewCardOverlayQualification extends React.Component{
               </Form.Label>
               <Form.Control
                 name="specialization"
-                onChange={e=>this.props.handleChangeProp('specialization',e.target.value)}
+                onChange={e=>this.props.onFieldUpdate('specialize',e.target.value)}
                 placeholder="Psycodynamics"
-                value={this.props.specialization}
+                value={this.props.fields.specialize}
               />
             </Form.Group>
           </div>
@@ -115,9 +124,9 @@ class EditPreviewCardOverlayQualification extends React.Component{
               </Form.Label>
               <Form.Control
                 name="experience"
-                onChange={e=>this.props.handleChangeProp('experience',e.target.value)}
+                onChange={e=>this.props.onFieldUpdate('years_of_experience',e.target.value)}
                 placeholder="8 years"
-                value={this.props.experience}/>
+                value={this.props.fields.years_of_experience}/>
             </Form.Group>
           </div>
         </div>

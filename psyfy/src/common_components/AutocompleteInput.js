@@ -4,13 +4,13 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 
 
 class AutocompleteInput extends React.Component {
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
 
   }
 
   handleChange = (address) => {
-    this.props.handleChangeProp('clinic_address', address)
+    this.props.onFieldUpdate('address', address)
   }
 
   render(){

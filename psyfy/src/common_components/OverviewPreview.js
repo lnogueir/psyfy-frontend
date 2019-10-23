@@ -8,17 +8,20 @@ function OverviewPreview(props){
       <div className="m15">
         <div className="d-flex justify-content-center">
           <OverviewPreviewImage
-            handleImageSrc={props.handleImageSrc}
-            image_src={props.image_src}
+            onFieldUpdate={props.onFieldUpdate.image_uri}
+            image_uri={props.fields.image_uri}
           />
           <OverviewPreviewCard
-            is_therapist={props.is_therapist}
             handlePageTitleUpdate={props.handlePageTitleUpdate}
+            onFieldUpdate={props.onFieldUpdate.card_info}
+            updatePageTitle={props.updatePageTitle}
+            fields={props.fields.card_info}
           />
         </div>
         <div className="d-flex justify-content-center">
           <OverviewPreviewSummary
-            is_therapist={props.is_therapist}
+            fields={props.fields.summary}
+            onFieldUpdate={props.onFieldUpdate.summary}
           />
         </div>
       </div>

@@ -1,49 +1,17 @@
 import React from 'react';
 import NavbarUserButton from './NavbarUserButton';
-
+import NavbarSignButton from './NavbarSignButton'
+import Utils from '../assets/js/Utils';
 
 
 function Navbar(props){
     return (
-      <nav className="navbar navbar-expand-md navbar-light bg-psyfy-navbar">
+      <nav style={{height:"87px"}} className="navbar navbar-expand-md navbar-light bg-psyfy-navbar">
         <a className="navbar-brand" href="#">Psyfy</a>
-        <div id="hide-left-for-40">
-          <NavbarUserButton name={props.name} image_src={props.image_src}/>
-        </div>
-        <button id="toggle-button" className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-icon"></span>
-        </button>
-
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul className="navbar-nav mr-auto">
-            <li className="nav-item active">
-              <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="#">Link</a>
-            </li>
-            <li className="nav-item dropdown">
-              <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Dropdown
-              </a>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a className="dropdown-item" href="#">Action</a>
-                <a className="dropdown-item" href="#">Another action</a>
-                <div className="dropdown-divider"></div>
-                <a className="dropdown-item" href="#">Something else here</a>
-              </div>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link disabled" href="#" tabIndex="-1" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-        </div>
-        <div id="display-right-for-40">
-          <NavbarUserButton name={props.name} image_src={props.image_src}/>
-        </div>
+        <div className="collapse navbar-collapse" id="navbarSupportedContent"></div>
+        <NavbarSignButton />
       </nav>
     )
-
 }
 
 export default Navbar;

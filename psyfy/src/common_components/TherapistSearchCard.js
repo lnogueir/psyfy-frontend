@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin, faEnvelope, faUserMd, faPhone } from '@fortawesome/free-solid-svg-icons'
 
 class TherapistSearchCard extends React.Component{
-  constructor(){
-    super()
+  constructor(props){
+    super(props)
     this.state = {
       selected_tab: "1"
     }
