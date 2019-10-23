@@ -1,5 +1,4 @@
 import React from 'react'
-import CardGroup from 'react-bootstrap/CardGroup'
 import OverviewPreviewImage from './OverviewPreviewImage'
 import OverviewPreviewCard from './OverviewPreviewCard'
 import OverviewPreviewSummary from './OverviewPreviewSummary'
@@ -9,13 +8,21 @@ function OverviewPreview(props){
       <div className="m15">
         <div className="d-flex justify-content-center">
           <OverviewPreviewImage
-            handleImageSrc={props.handleImageSrc}
-            image_src={props.image_src}
+            onFieldUpdate={props.onFieldUpdate.image_uri}
+            image_uri={props.fields.image_uri}
           />
-          <OverviewPreviewCard handlePageTitleUpdate={props.handlePageTitleUpdate}/>
+          <OverviewPreviewCard
+            handlePageTitleUpdate={props.handlePageTitleUpdate}
+            onFieldUpdate={props.onFieldUpdate.card_info}
+            updatePageTitle={props.updatePageTitle}
+            fields={props.fields.card_info}
+          />
         </div>
         <div className="d-flex justify-content-center">
-          <OverviewPreviewSummary />
+          <OverviewPreviewSummary
+            fields={props.fields.summary}
+            onFieldUpdate={props.onFieldUpdate.summary}
+          />
         </div>
       </div>
     );

@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin, faEnvelope, faUserMd, faAddressBook } from '@fortawesome/free-solid-svg-icons'
 
 class SearchPreview extends React.Component{
-    constructor(){
-      super()
+    constructor(props){
+      super(props)
       this.state={
         is_small_screen: window.innerWidth <= 770,
       }

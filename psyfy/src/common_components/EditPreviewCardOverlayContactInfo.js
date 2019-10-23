@@ -3,20 +3,81 @@ import Form from 'react-bootstrap/Form';
 import ButtonToolbar from 'react-bootstrap/ButtonToolbar'
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger'
 import Tooltip from 'react-bootstrap/Tooltip'
-import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faMapPin, faEnvelope, faUserMd, faAddressBook } from '@fortawesome/free-solid-svg-icons'
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete';
+import AutocompleteInput from './AutocompleteInput'
+import { geocodeByAddress , getLatLng } from 'react-places-autocomplete';
+import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
 
 
 class EditPreviewCardOverlayContactInfo extends React.Component{
-  constructor(){
-    super()
-    this.show_tooltip=false
+  constructor(props){
+    super(props)
+    this.show_tooltip=false;
   }
+
+  updateFields = () => {
+    this.name = this.props.fields.full_name
+    this.contact_email = this.props.fields.contact_email
+    this.number = this.props.fields.phone_number
+    this.address = this.props.fields.address
+  }
+
+  componentDidMount = () => {
+    this.updateFields()
+  }
+
+  isUpdating = () => {
+    return (
+      this.name !== this.props.fields.full_name ||
+      this.contact_email !== this.props.fields.contact_email ||
+      this.number !== this.props.fields.phone_number ||
+      this.address !== this.props.fields.address
+    )
+  }
+
+  componentDidMount = () =>{
+    this.updateFields()
+  }
+
+  handleUpdate = (event) => {
+    event.preventDefault();
+    const address = event.target.elements.clinicAdress.value;
+    const name = event.target.elements.fullName.value
+    const data = {
+      full_name: name,
+      address: address,
+      phone_number: event.target.elements.phoneNumber.value,
+      contact_email: event.target.elements.contact_email.value,
+    }
+    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
+    const loggedUser = JSON.parse(correct_storage)
+    geocodeByAddress(address)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/contactInformation`
+        data.location = latLng
+        fetch(url, {
+          method:'PUT',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': loggedUser.token
+          }
+        })
+        .then(response=>{
+          if(response.status===200){
+            this.updateFields()
+            loggedUser.name = name
+            window.localStorage.setItem('loggedUser', loggedUser)
+            this.forceUpdate()
+          }
+        })
+      })
+      .catch(error => console.error('Error', error));
+
+  }
+
 
   handleEmailTooltip = () => {
     if(this.show_tooltip){
@@ -30,8 +91,11 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
 
   render(){
     return (
-      <Form>
-        <h3>{"Contact Info:"}</h3>
+      <Form onSubmit={this.handleUpdate}>
+        <EditPreviewCardOverlayTitle
+          isUpdating={this.isUpdating}
+          title={"Contact Info"}
+        />
         <div className="row">
           <div className="col-xs-6 col-md-6 col-lg-6">
             <Form.Group controlId="formGridName">
@@ -42,9 +106,10 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                 </Form.Label>
               <Form.Control
                 name="fullName"
-                onChange={e=>this.props.handleChangeProp('name',e.target.value)}
+                onChange={e=>this.props.onFieldUpdate('full_name',e.target.value)}
                 type="therapistName"
-                placeholder="Enter your name" value={this.props.name}
+                placeholder="Enter your name"
+                value={this.props.fields.full_name}
               />
             </Form.Group>
           </div>
@@ -57,8 +122,9 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
               </Form.Label>
               <Form.Control
                 name="phoneNumber"
-                onChange={e=>this.props.handleChangeProp('number',e.target.value)}
-                placeholder="(123) 456 789" value={this.props.number}
+                onChange={e=>this.props.onFieldUpdate('phone_number',e.target.value)}
+                placeholder="(123) 456 789"
+                value={this.props.fields.phone_number}
               />
             </Form.Group>
           </div>
@@ -93,7 +159,13 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                     </ButtonToolbar>
                   </div>
                 </Form.Label>
-              <Form.Control name="email" onChange={e=>this.props.handleChangeProp('contact_email',e.target.value)} type="email" placeholder="Your email" value={this.props.contact_email}/>
+              <Form.Control
+                name="contact_email"
+                onChange={e=>{
+                  this.props.onFieldUpdate('contact_email',e.target.value)
+                }}
+                placeholder="Your email"
+                value={this.props.fields.contact_email}/>
             </Form.Group>
           </div>
           <div className="col-xs-12 col-lg-6">
@@ -103,66 +175,19 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                 &nbsp;&nbsp;&nbsp;
                 <b>Clinic Address</b>
               </Form.Label>
-                {
-                <PlacesAutocomplete
-                  value={this.props.address}
-                  onSelect={this.handleSelect}
-                  onChange={input=>this.props.handleChangeProp('clinic_address',input)}
-                >
-                {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-                  <div>
-                    <Form.Control
-                      name="clinicAdress"
-                      value={this.props.address}
-                      {...getInputProps({
-                        placeholder:"1234 Main St",
-                        className: 'location-search-input',
-                      })}
-                    />
-                    <div className={`autocomplete-dropdown-container${suggestions.length===0?" hidden":""}`}>
-                      {loading && <div>Loading...</div>}
-                      {suggestions.map(suggestion => {
-                        const className = suggestion.active
-                          ? 'suggestion-item--active'
-                          : 'suggestion-item';
-                        const style = suggestion.active
-                          ? { backgroundColor: '#cde9f7', cursor: 'pointer', padding:10 }
-                          : { backgroundColor: '#ffffff', cursor: 'pointer' };
-                        return (
-                          <div
-                            {...getSuggestionItemProps(suggestion, {
-                              className,
-                              style,
-                            })}
-                          >
-                            <div
-                              onClick={()=>{
-                                this.setState({address:suggestion.description, address_id: suggestion.placeId})
-                              }}
-                              >
-                              <span>{suggestion.description}</span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </div>
-                )}
-              </PlacesAutocomplete>
-            }
+              {
+              <AutocompleteInput
+                updateLatLng={this.updateLatLng}
+                address={this.props.fields.address}
+                onFieldUpdate={this.props.onFieldUpdate}
+              />
+              }
             </Form.Group>
           </div>
-        </div>
-        <div className="justify-between">
-          <Button id="update-contact-button" className="w200" variant="info">Update Contact</Button>
-          <Form.Group id="formGridCheckbox">
-            <Form.Check name="allowPatientToViewContact" type="checkbox" label="Allow patient to view my contact information" />
-          </Form.Group>
         </div>
       </Form>
     )
   }
 }
-
 
 export default EditPreviewCardOverlayContactInfo;
