@@ -1,18 +1,24 @@
-import React from 'react'
-import Card from 'react-bootstrap/Card'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCamera , faThumbsUp , faThumbsDown , faSpinner } from '@fortawesome/free-solid-svg-icons'
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera , faThumbsUp , faThumbsDown , faSpinner } from '@fortawesome/free-solid-svg-icons';
+import Utils from '../assets/js/Utils';
 
 
 class TherapistOverviewPreviewImage extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.state={
       selectedFile:null,
       is_edit: false,
       is_loading: false,
       preview_src: null
     }
+  }
+
+
+  componentWillUnmount = () => {
+    Utils.Request.abortProcesses();
   }
 
 
@@ -23,36 +29,43 @@ class TherapistOverviewPreviewImage extends React.Component{
     this.setState((prevState)=>({is_edit:!prevState.is_edit, selectedFile:file, preview_src: imageUrl}))
   }
 
+
   handleSaveImage = () => {
-    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${5}/uploadProfileImage`
+    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
+    var loggedUser = JSON.parse(correct_storage)
+    const endpoint = `/site_profiles/${loggedUser.id}/uploadProfileImage`
+    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/uploadProfileImage`
     this.setState({is_loading:true})
     var form = new FormData();
     form.append("req", this.state.selectedFile)
+    // var req = new Utils.Request()
+    // req.setAuthorization(authToken)
+    // req.POST()
     try{
       fetch(url, {
         method: 'POST',
         body: form,
-        cache: 'no-cache',
         headers:{
-          "Authorization": "GKLJulXBCcxvwfRTDzb5dB7X6KCBgVh1B1BeCX0BqiUNzJFViAch74K28kggGsk9"
+          "Authorization": loggedUser.token
         }
       })
       .then(response=>response.json())
       .then(responseJson=>{
-        setTimeout(()=>{
-          this.props.handleImageSrc(responseJson.result.media.source_url+`?${Math.floor(Math.random() * 10000)}`)
-          this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))
-        }, 700)
+        const image_uri = responseJson.result.media.source_url+`?${Utils.getRandomNumber()}`
+        this.props.onFieldUpdate(image_uri)
+        loggedUser.image_uri = image_uri
+        window.localStorage.setItem('loggedUser', loggedUser)
+        this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))
       })
     }catch(err){
-      alert("Error occurred when uploading image. Please contact support")
+      alert(Utils.ERROR_MESSAGE)
     }
   }
 
   render(){
     return (
       <Card id="therapist-card">
-        <Card.Img alt="Profile image" src={this.state.preview_src==null?this.props.image_src!=null?this.props.image_src:require("../assets/images/profile_fill.png"):this.state.preview_src}/>
+        <Card.Img alt="Profile image" src={this.state.preview_src==null?this.props.image_uri!=null?this.props.image_uri:require("../assets/images/profile_fill.png"):this.state.preview_src}/>
         <div className="hover-img">
           <div>
             {
@@ -68,7 +81,7 @@ class TherapistOverviewPreviewImage extends React.Component{
                   !this.state.is_loading
                   ?
                   <div align="center">
-                    <h3 style={{fontWeight:500}}>Confirm?</h3>
+                    <b className="mt40 fs25" style={{color:"#595966"}}><i>Save?</i></b>
                     <div className="justify-around mt40">
                         <FontAwesomeIcon
                           onClick={()=>this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))}

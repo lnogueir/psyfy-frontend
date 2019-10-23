@@ -5,8 +5,8 @@ import Header from '../../common_components/Header';
 import TherapistSearchCard from '../../common_components/TherapistSearchCard';
 
 class SearchResultPage extends React.Component{
-  constructor(){
-    super();
+  constructor(props){
+    super(props);
     this.page_title = "Search Results"
     this.state = {
       name: "Lucas Nogueira" ,
