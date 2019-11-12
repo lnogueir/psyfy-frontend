@@ -2,20 +2,18 @@ import React from 'react'
 import Calendar from '../common_components/Calendar'
 
 class CalendarPage extends React.Component{
-  static title = "My Calendar"
   constructor(props){
     super(props)
   }
 
-  componentDidMount = () => {
-    this.props.updatePageTitle(CalendarPage.title)
-  }
-
   render(){
     return(
-      <div>
+      <React.Fragment>
+        <div className="justify-end mr15">
+          <h1 className="text-bold-white">My Calendar</h1>
+        </div>
         <Calendar />
-      </div>
+      </React.Fragment>
     )
   }
 }

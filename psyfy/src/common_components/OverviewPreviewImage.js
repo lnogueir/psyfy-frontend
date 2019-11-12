@@ -34,38 +34,32 @@ class TherapistOverviewPreviewImage extends React.Component{
     const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
     var loggedUser = JSON.parse(correct_storage)
     const endpoint = `/site_profiles/${loggedUser.id}/uploadProfileImage`
-    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/uploadProfileImage`
+    const authToken = loggedUser.token
     this.setState({is_loading:true})
     var form = new FormData();
     form.append("req", this.state.selectedFile)
-    // var req = new Utils.Request()
-    // req.setAuthorization(authToken)
-    // req.POST()
-    try{
-      fetch(url, {
-        method: 'POST',
-        body: form,
-        headers:{
-          "Authorization": loggedUser.token
-        }
-      })
-      .then(response=>response.json())
-      .then(responseJson=>{
-        const image_uri = responseJson.result.media.source_url+`?${Utils.getRandomNumber()}`
-        this.props.onFieldUpdate(image_uri)
-        loggedUser.image_uri = image_uri
-        window.localStorage.setItem('loggedUser', loggedUser)
-        this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))
-      })
-    }catch(err){
-      alert(Utils.ERROR_MESSAGE)
-    }
+    const NOT_JSON = true
+    var req = new Utils.Request(NOT_JSON)
+    req.setAuthorization(authToken)
+    req.POST(endpoint, form)
+    .then(response=>response.json())
+    .then(responseJson=>{
+      const image_uri = responseJson.result.media.source_url+`?${Utils.getRandomNumber()}`
+      this.props.onFieldUpdate(image_uri)
+      loggedUser.image_uri = image_uri
+      window.localStorage.setItem('loggedUser', loggedUser)
+      this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))
+    })
+    .catch(err=>{
+      this.setState(prevState=>({preview_src: null,is_edit:!prevState.is_edit, is_loading:false}))
+      alert(Utils.ERROR_MESSAGE + err)
+    })
   }
 
   render(){
     return (
-      <Card id="therapist-card">
-        <Card.Img alt="Profile image" src={this.state.preview_src==null?this.props.image_uri!=null?this.props.image_uri:require("../assets/images/profile_fill.png"):this.state.preview_src}/>
+      <Card style={{height:'auto'}} id="therapist-card">
+        <Card.Img style={{height:'100%'}} alt="Profile image" src={this.state.preview_src==null?this.props.image_uri!=null?this.props.image_uri:require("../assets/images/profile_fill.png"):this.state.preview_src}/>
         <div className="hover-img">
           <div>
             {

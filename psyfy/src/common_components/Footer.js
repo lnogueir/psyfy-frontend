@@ -2,9 +2,8 @@ import React from 'react';
 
 function Footer(){
   return (
-  <footer className="bg-psyfy-footer page-footer font-small pt-4">
-
-    <div className="container-fluid text-center">
+  <footer className="bg-psyfy-footer page-footer mt10">
+    <div className="container-fluid text-center text-bold-white font-small">
 
       <div className="row">
 
@@ -13,7 +12,7 @@ function Footer(){
           <h5 className="text-uppercase">Footer Content</h5>
           <p>Here you can use rows and columns to organize your footer content.</p>
 
-        </div>        
+        </div>
 
         <div className="col-sm-6 col-md-6 col-lg-6">
 

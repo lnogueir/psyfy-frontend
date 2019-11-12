@@ -8,7 +8,7 @@ import { faMapPin, faEnvelope, faUserMd, faAddressBook } from '@fortawesome/free
 import AutocompleteInput from './AutocompleteInput'
 import { geocodeByAddress , getLatLng } from 'react-places-autocomplete';
 import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
-
+import Utils from '../assets/js/Utils'
 
 class EditPreviewCardOverlayContactInfo extends React.Component{
   constructor(props){
@@ -55,16 +55,12 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
     geocodeByAddress(address)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/contactInformation`
         data.location = latLng
-        fetch(url, {
-          method:'PUT',
-          body: JSON.stringify(data),
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': loggedUser.token
-          }
-        })
+        const endpoint = `/site_profiles/${loggedUser.id}/contactInformation`
+        const authToken = loggedUser.token
+        var req = new Utils.Request()
+        req.setAuthorization(authToken)
+        req.PUT(endpoint, JSON.stringify(data))
         .then(response=>{
           if(response.status===200){
             this.updateFields()
@@ -72,9 +68,10 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
             window.localStorage.setItem('loggedUser', loggedUser)
             this.forceUpdate()
           }
-        })
+        }).catch(err => alert(Utils.ERROR_MESSAGE + err));
       })
-      .catch(error => console.error('Error', error));
+      .catch(err => alert(Utils.ERROR_MESSAGE + err));
+
 
   }
 
@@ -175,13 +172,12 @@ class EditPreviewCardOverlayContactInfo extends React.Component{
                 &nbsp;&nbsp;&nbsp;
                 <b>Clinic Address</b>
               </Form.Label>
-              {
               <AutocompleteInput
-                updateLatLng={this.updateLatLng}
                 address={this.props.fields.address}
+                className={'form-control'}
+                name={"clinicAdress"}
                 onFieldUpdate={this.props.onFieldUpdate}
               />
-              }
             </Form.Group>
           </div>
         </div>

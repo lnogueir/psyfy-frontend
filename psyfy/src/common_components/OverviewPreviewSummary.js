@@ -17,6 +17,10 @@ class OverviewPreviewSummary extends React.Component{
     Utils.Request.abortProcesses();
   }
 
+  componentDidMount = () => {
+    document.getElementById('summary-box').innerHTML = this.props.fields;
+  }
+
   editSummary = () => {
     if(this.state.is_edit){
       var req = new Utils.Request()
@@ -37,31 +41,27 @@ class OverviewPreviewSummary extends React.Component{
     return(
       <Card style={{width:'55em'}}>
         <Card.Header as="h4">
-          Summary
-          {
-            true &&
-            <GeneralEditIcon
-              is_edit={this.state.is_edit}
-              onClick={this.editSummary}
-            />
-          }
+          About
+          <GeneralEditIcon
+            is_edit={this.state.is_edit}
+            onClick={this.editSummary}
+          />
         </Card.Header>
-        <Card.Body>
+        <div className="p10">
           <blockquote className="blockquote">
             <p
               ref="summaryNode"
               placeholder="Here is a good place to highlight your qualifications and experience..."
-              className="p10 scrollbox block-horizontal-scroll"
+              className="scrollbox block-horizontal-scroll"
               contentEditable={this.state.is_edit}
               id="summary-box"
             >
-              {this.props.fields}
             </p>
             <footer className="blockquote-footer">
               <cite title="Source Title">Dr. Lucas Nogueira</cite>
             </footer>
           </blockquote>
-        </Card.Body>
+        </div>
       </Card>
     )
   }

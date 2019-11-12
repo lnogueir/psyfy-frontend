@@ -3,13 +3,16 @@ import OverviewPreview from '../common_components/OverviewPreview';
 import PageTemplate from '../common_components/PageTemplate';
 import Loading from '../common_components/Loading';
 import OverviewTrailer from '../common_components/OverviewTrailer';
+import OverviewBill from '../common_components/OverviewBill';
+import OverviewGalery from '../common_components/OverviewGalery';
+import OverviewSpeciality from '../common_components/OverviewSpeciality';
+import OverviewClientFocus from '../common_components/OverviewClientFocus'
 import Overlay from '../common_components/Overlay';
 import LoginCard from '../common_components/LoginCard';
 import Utils from '../assets/js/Utils';
 
 
 class OverviewPage extends React.Component{
-  static title = "Overview Page"
   constructor(props){
     super(props);
     this.state={
@@ -94,7 +97,6 @@ class OverviewPage extends React.Component{
   }
 
   componentDidMount = () => {
-      this.props.updatePageTitle(OverviewPage.title)
       const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
       const loggedUser = JSON.parse(correct_storage)
       const endpoint = `/site_profiles/${loggedUser.id}?filter[include]=contactInformation&filter[include]=media&filter[include]=education`
@@ -133,34 +135,47 @@ class OverviewPage extends React.Component{
           ?
           <Loading />
           :
-          <div className="row">
-            <div className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
-              <section>
-                <OverviewPreview
-                  fields={this.state.preview_info}
-                  updatePageTitle={this.props.updatePageTitle}
-                  onFieldUpdate={
-                    {
-                      card_info:{
-                          contact_info:this.updateFieldPreviewCardContact,
-                          qualification_info:this.updateFieldPreviewCardQualification
-                      },
-                      summary: this.updateFieldPreviewSummary,
-                      image_uri: this.updateFieldPreviewImage
+          <React.Fragment>
+            <div className="row m5">
+              <div className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
+                <section>
+                  <OverviewPreview
+                    fields={this.state.preview_info}
+                    onFieldUpdate={
+                      {
+                        card_info:{
+                            contact_info:this.updateFieldPreviewCardContact,
+                            qualification_info:this.updateFieldPreviewCardQualification
+                        },
+                        summary: this.updateFieldPreviewSummary,
+                        image_uri: this.updateFieldPreviewImage
+                      }
                     }
-                  }
-                />
-              </section>
+                  />
+                  <div className="d-flex justify-content-center">
+                    <OverviewGalery />
+                  </div>
+                </section>
+              </div>
+              <div className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap">
+                <div className="d-flex justify-content-center">
+                  <OverviewBill />
+                </div>
+                <div className="d-flex justify-content-center">
+                  <OverviewTrailer
+                    onFieldUpdate={this.updateStateField}
+                    trailer_id={this.state.trailer_id}
+                  />
+                </div>
+                <div align="center">
+                  <div className="column-wrap-lg column-wrap-sm d-flex justify-content-center responsive-md-width">
+                    <OverviewSpeciality />
+                    <OverviewClientFocus />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap" align="center">
-              <section>
-                <OverviewTrailer
-                  onFieldUpdate={this.updateStateField}
-                  trailer_id={this.state.trailer_id}
-                />
-              </section>
-            </div>
-          </div>
+          </React.Fragment>
     )
   }
 
