@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faLightbulb, faCertificate, faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
+import Utils from '../assets/js/Utils'
 
 class EditPreviewCardOverlayQualification extends React.Component{
   constructor(props){
@@ -41,23 +42,18 @@ class EditPreviewCardOverlayQualification extends React.Component{
     }
     const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
     const loggedUser = JSON.parse(correct_storage)
-    const url = process.env.REACT_APP_LOOPBACK_IP + `/site_profiles/${loggedUser.id}/education`
-    fetch(url, {
-      method:'PUT',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': loggedUser.token
-      }
-    })
+    const endpoint = `/site_profiles/${loggedUser.id}/education`
+    const authToken = loggedUser.token
+    var req = new Utils.Request()
+    req.setAuthorization(authToken)
+    req.PUT(endpoint, JSON.stringify(data))
     .then(response=>{
-      console.log(response)
       if( response.status===200){
-        this.updateFields()
-        this.forceUpdate()
+          this.updateFields()
+          this.forceUpdate()
       }
     })
-    .catch(error => console.error('Error', error));
+    .catch(err => alert(Utils.ERROR_MESSAGE + err));
   }
 
   render(){

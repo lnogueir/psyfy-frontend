@@ -5,16 +5,14 @@ import OverviewPreviewSummary from './OverviewPreviewSummary'
 
 function OverviewPreview(props){
     return(
-      <div className="m15">
+      <React.Fragment>
         <div className="d-flex justify-content-center">
           <OverviewPreviewImage
             onFieldUpdate={props.onFieldUpdate.image_uri}
             image_uri={props.fields.image_uri}
           />
           <OverviewPreviewCard
-            handlePageTitleUpdate={props.handlePageTitleUpdate}
             onFieldUpdate={props.onFieldUpdate.card_info}
-            updatePageTitle={props.updatePageTitle}
             fields={props.fields.card_info}
           />
         </div>
@@ -24,7 +22,7 @@ function OverviewPreview(props){
             onFieldUpdate={props.onFieldUpdate.summary}
           />
         </div>
-      </div>
+      </React.Fragment>
     );
 
 }

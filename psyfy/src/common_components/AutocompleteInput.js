@@ -1,5 +1,4 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form'
 import PlacesAutocomplete from 'react-places-autocomplete';
 
 
@@ -13,6 +12,7 @@ class AutocompleteInput extends React.Component {
     this.props.onFieldUpdate('address', address)
   }
 
+
   render(){
       return (
         <PlacesAutocomplete
@@ -22,13 +22,12 @@ class AutocompleteInput extends React.Component {
         >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
-            <Form.Control
-              name="clinicAdress"
+            <input
+              name={this.props.name}
+              type="text"
               value={this.props.address}
-              {...getInputProps({
-                placeholder:"1234 Main St",
-                className: 'location-search-input',
-              })}
+              className={this.props.className}
+              {...getInputProps({ placeholder:"Clinic Location" })}
             />
             <div className={`autocomplete-dropdown-container${suggestions.length===0?" hidden":""}`}>
               {loading && <div>Loading...</div>}

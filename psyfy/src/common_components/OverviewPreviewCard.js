@@ -6,31 +6,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMapPin } from '@fortawesome/free-solid-svg-icons';
 import GeneralEditIcon from './GeneralEditIcon';
 import Overlay from './Overlay';
+import Utils from '../assets/js/Utils';
 
 class OverviewPreviewCard extends React.Component{
   constructor(){
     super()
-    this.should_display_edit=false
+    this.state={
+      should_display_edit:false
+    }
+    this.toggleDisplay = Utils.updateStateField.bind(this)
   }
-
-
-  toggleShouldDisplay = () =>{
-      this.should_display_edit=!this.should_display_edit
-      if(!this.should_display_edit){
-        this.props.updatePageTitle('Therapist Overview')
-      }else{
-        this.props.updatePageTitle('Edit Profile Preview')
-      }
-  }
-
-
 
   render(){
     return (
       <React.Fragment>
         <Overlay
-          toggleDisplay={this.toggleShouldDisplay}
-          should_display={this.should_display_edit}
+          toggleDisplay={()=>this.toggleDisplay('should_display_edit', false)}
+          should_display={this.state.should_display_edit}
+          className={"overlay-content-preview"}
         >
           <EditPreviewCardOverlay
               fields={this.props.fields}
@@ -40,13 +33,10 @@ class OverviewPreviewCard extends React.Component{
         <Card id="overview-preview-card">
           <Card.Header as="h4">
             {this.props.fields.contact_info.full_name}
-            {
-              true &&
-              <GeneralEditIcon
-                is_edit={false}
-                onClick={this.toggleShouldDisplay}
-              />
-            }
+            <GeneralEditIcon
+              is_edit={false}
+              onClick={()=>this.toggleDisplay('should_display_edit', true)}
+            />
           </Card.Header>
           <Card.Body>
               <div>

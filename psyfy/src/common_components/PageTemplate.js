@@ -6,8 +6,10 @@ import Header from './Header';
 function PageTemplate(props){
     return (
       <React.Fragment>
-          <Header page_title={props.page_title} />
-          {props.children}
+          <Header />
+          <div className="mt50">
+            {props.children}
+          </div>
           <Footer />
       </React.Fragment>)
 }

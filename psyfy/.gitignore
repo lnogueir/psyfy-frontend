@@ -11,6 +11,11 @@
 # production
 /build
 
+.eslintrc.json
+.gitignore.swp
+.vscode/
+
+
 # misc
 .DS_Store
 .env.local

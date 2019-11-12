@@ -6,7 +6,8 @@ import Spinner from 'react-bootstrap/Spinner';
 import Alert from 'react-bootstrap/Alert';
 import SweetAlert from 'sweetalert2-react';
 import { FaUserMd, FaLock } from 'react-icons/fa';
-import Utils from '../assets/js/Utils'
+import Utils from '../assets/js/Utils';
+import {Link} from 'react-router-dom';
 
 
 class LoginCard extends React.Component{
@@ -25,7 +26,6 @@ class LoginCard extends React.Component{
             this.setState({errorAlertShow: true })
         }else{
             this.setState({successAlertShow: true })
-
         }
     }
 
@@ -55,7 +55,7 @@ class LoginCard extends React.Component{
               token: token,
               name: responseJson.result.full_name,
               id: responseJson.result.profile_id,
-              image_uri: responseJson.result.profile_image.source_url
+              image_uri: responseJson.result.profile_image.source_url + `?${Utils.getRandomNumber()}`
             }
             window.localStorage.clear()
             window.sessionStorage.clear()
@@ -83,23 +83,22 @@ class LoginCard extends React.Component{
           showCancelButton={false}
           showConfirmButton={false}
         /> :
-        <div onClick={(e)=>e.stopPropagation()} className="overlay-content-login">
           <Card className="login-card box-shadow">
               <div className="mb40 mt10">
-                  <h3>Psyfy Login</h3>
+                <img style={{width:'100%'}} src={require('../assets/images/psycare_logo_v2.png')}/>
               </div>
               <Form onSubmit={this.handleLogin} >
                   <div style={{textAlign:"center"}}>
                       <Form.Group controlId="formBasicEmail">
-                          <div style={{position:'relative'}} className="input-group mb-3">
+                          <div className="mb-3">
                               <i className="login-input-icon" ><FaUserMd /></i>
-                              <input type="text" name="loginEmail" className="form-control login-input" placeholder="Login Email" />
+                              <input type="text" name="loginEmail" className="login-input" placeholder="Login Email" />
                           </div>
                       </Form.Group>
                       <Form.Group className="mt30" controlId="formBasicPassword">
-                          <div style={{position:'relative'}} className="input-group mb-3">
+                          <div className="mb-3">
                               <i className="login-input-icon" ><FaLock /></i>
-                              <input type="password" name="password" className="form-control login-input" placeholder="Password" />
+                              <input type="password" name="password" className="login-input" placeholder="Password" />
                           </div>
                       </Form.Group>
                       <div className="justify-around">
@@ -114,7 +113,7 @@ class LoginCard extends React.Component{
                         :
                         <button
                           className="logbtn mt30"
-                          type="submit"  >
+                          type="submit">
                             Log In
                         </button>
                       }
@@ -127,10 +126,9 @@ class LoginCard extends React.Component{
                   </div>
               </Form>
               <div className="mt40" >
-                  <Card.Footer className="bg-transparent text-muted">Are you a doctor? <a href="#">Request an account</a></Card.Footer>
+                  <Card.Footer className="bg-transparent text-muted">Are you a doctor? <Link onClick={this.props.toggleDisplay} to="/request_account"><a href="#">Request an account</a></Link></Card.Footer>
               </div>
           </Card>
-        </div>
       )
     }
 }

@@ -1,8 +1,9 @@
 import React from 'react'
 import Utils from '../assets/js/Utils'
-import { Link, Redirect } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class NavbarUserButtonDropdown extends React.Component{
+
     handleLogout = () => {
       var req = new Utils.Request()
       const endpoint = "/site_users/logout"
@@ -31,21 +32,24 @@ class NavbarUserButtonDropdown extends React.Component{
             <a href="#" data-toggle="dropdown">
                 {this.props.children}
             </a>
-            <div style={{marginLeft:5,marginTop:-1, width:250}} className="dropdown-menu">
+            <div style={{marginLeft:5,marginTop:-1}} id="dropdown-nav" className="dropdown-menu">
               <Link className="dropdown-item" to='/overview'>
                   My Overview
               </Link>
-              <a className="dropdown-item" href="#">Manage Credentials</a>
-              <div className="dropdown-divider"></div>
-              <Link to="/">
-                <a
-                  style={{color:"red"}}
-                  className="dropdown-item"
-                  onClick={this.handleLogout}
-                >
-                  Logout
+              <Link to='/calendar'>
+                <a href="#" className="dropdown-item">
+                  My Calendar
                 </a>
               </Link>
+              <a className="dropdown-item" href="#">Manage Credentials</a>
+              <div className="dropdown-divider"></div>
+              <a
+                style={{color:"red"}}
+                className="dropdown-item"
+                onClick={this.handleLogout}
+              >
+                Logout
+              </a>
             </div>
           </div>
         )
