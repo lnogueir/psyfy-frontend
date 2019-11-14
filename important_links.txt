@@ -4,3 +4,7 @@ https://codepen.io/scottloway/pen/zqoLyQ -- desenha um check mark quando complet
 
 
 https://app.monkeylearn.com/main/dashboard/ -- keyword extractor
+
+https://docs.google.com/document/d/1GPy-UEZdkJW4TCBlvmyRPUeyWuOctnTbE04MCGo2mHI/edit# --terms and conditions sample
+
+https://sweetalert2.github.io/#frameworks-integrations -- sweet alert props

@@ -1,7 +1,5 @@
 *{
-  font-family: avenir !important;
-
-  font-family: "Century Gothic";
+  font-family: avenir,"Century Gothic";
 }
 
 body {
@@ -431,6 +429,10 @@ a {
   margin:20px;
 }
 
+.m3{
+  margin:3px;
+}
+
 .m5{
   margin:5px;
 }
@@ -789,6 +791,16 @@ a {
   display:flex;
   justify-content: space-around;
 }
+
+.blue-href{
+  cursor:pointer;
+  color:blue;
+}
+
+.blue-href:hover{
+  text-decoration:underline;
+}
+
 
 .login-button-nav{
   margin-top:12px;
@@ -1177,7 +1189,7 @@ div.week-select .week-options-wrap .week-options:hover{
   overflow-x: hidden;
   height:380px;
 }
-
+ 
 
 
 .schedule-overlay-header{
@@ -1408,7 +1420,7 @@ input{
 
 .calendar-note-more{
   border-radius:8px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 10px 2px 4px;
   border-left:6px solid gray;
   background-color: lightgray;
   cursor:pointer;
@@ -1417,7 +1429,7 @@ input{
 
 .calendar-note-busy{
   border-radius:8px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 10px 2px 4px;
   border-left:6px solid red;
   background-color: #ffd1d2;
   width:auto;
@@ -1432,22 +1444,24 @@ div.busy-on-hover{
   position:relative
 }
 
-div.busy-on-hover > a {
-  display:none;
-  font-size: 22.5px;
+div.busy-on-hover > i {
+  opacity:0;
+  margin-left: 5px;
+  font-size: 20px;
+  transition: 0.5s ease;
+  position:absolute;
+  right:0px;
+  bottom:0px;
 }
 
-div.busy-on-hover:hover > a{
-  display:block;
-  position:absolute;
-  right:5px;
-  top:-2.75px;
-  cursor:pointer
+div.busy-on-hover:hover > i{
+  opacity:1;
+  cursor:pointer;
 }
 
 .calendar-note-available{
   border-radius:8px;
-  padding: 2px 4px 2px 4px;
+  padding: 2px 10px 2px 4px;
   border-left:6px solid #41a82f;
   background-color: #a9ed9d;
   width:auto;
