@@ -100,6 +100,7 @@ body {
 .text-bold-white{
   font-weight:700;
   color:white;
+  text-shadow: hsl(3, 47%, 82%) 1px 0 10px;
 }
 
 #page-title{
@@ -1578,6 +1579,16 @@ div.busy-on-hover:hover > i{
     width:90%;
     margin:50px 20px 50px 20px;
   }
+}
+
+.login-card-title{ 
+  color:#111; 
+  font-size: calc(24px + 1vw); 
+  font-weight: bold; 
+  letter-spacing: 0.5px; 
+  line-height: 1; 
+  text-shadow: 0 2px 5px lightgray;
+  text-align: center; 
 }
 
 @media only screen and (min-width: 990px){
