@@ -1,136 +1,85 @@
 import React from 'react';
-import Form from 'react-bootstrap/Form';
-import Card from 'react-bootstrap/Card';
-import Utils from '../../assets/js/Utils';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
+import LockIcon from '@material-ui/icons/Lock';
+import EmailIcon from '@material-ui/icons/Email';
+import ManageEmail from './ManageEmail'
+import ManagePassword from './ManagePassword'
 
-class ManagePasswordCard extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            card: "email", emailColor: "white", passwordColor: "#9d06bb49",
-            email: undefined, old_password: undefined, new_password: undefined
-        }
-    }
+function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
-    handleUpdate = (endpoint, data) => {
-        const loggedUser = Utils.getLoggedUser()
-        var req = new Utils.Request()
-        req.setAuthorization(loggedUser.token)
-        req.POST(JSON.stringify(data))
-            .then(response => {
-                if (response.status != 200) alert(Utils.ERROR_MESSAGE + 'status: ' + response.status)
-            }).catch(err => alert(Utils.ERROR_MESSAGE + err))
-    }
-
-
-    render() {
-        return (
-            <div className="container">
-
-                <div className="row">
-
-
-                    <button className="manage-change-btn col-xs-6 col-md-6 col-lg-6"
-                        onClick={() => this.setState({ card: "email", emailColor: "white", passwordColor: "#9d06bb49" })}
-                        style={{ borderRadius: "5px 5px 0px 0px", backgroundColor: this.state.emailColor }}  >
-
-                        <label className="change-email-lbl" > Change Email </label>
-
-                    </button>
-
-                    <button className="manage-change-btn col-xs-6 col-md-6 col-lg-6"
-                        onClick={() => this.setState({ card: "password", emailColor: "#9d06bb49", passwordColor: "white" })}
-                        style={{ borderRadius: "5px 5px 0px 0px", backgroundColor: this.state.passwordColor }} >
-                        <label className="change-email-lbl" > Change Password </label>
-                    </button>
-
-                </div>
-
-                {this.state.card == "email"
-                    ?
-                    <Card className="row manage-card" style={{ padding: 10, borderRadius: "0px 5px 5px 5px" }} >
-
-                        <label style={{ fontSize: 20, fontWeight: 650 }}>Change Your Email</label>
-
-                        <Form style={{ padding: "0% 10% 5% 10%" }} >
-
-                            <Form.Group >
-                                <div >
-
-                                    <input type="text" className="manage-input" placeholder="New Email" />
-                                </div>
-                            </Form.Group>
-                            <Form.Group >
-                                <div >
-
-                                    <input type="text" className="manage-input" placeholder="Old Email" />
-                                </div>
-                            </Form.Group>
-                            <Form.Group >
-                                <div >
-                                    <input type="text" className="manage-input" placeholder="Confirm Old Email" />
-                                </div>
-                            </Form.Group>
-
-
-
-
-                        </Form>
-                        <button className="managebtn mt30" style={{ backgroundColor: "#c878fa", borderStyle: "none" }}
-                            variant="primary" type="submit"  >
-                            Change My Email
-                    </button>
-
-
-                    </Card>
-                    :
-                    <Card className="row manage-card" style={{ padding: 10, borderRadius: "5px 0px 5px 5px" }} >
-
-                        <label style={{ fontSize: 20, fontWeight: 650 }}>Change Your Password</label>
-
-                        <Form style={{ padding: "0% 10% 5% 10%" }} >
-
-                            <Form.Group >
-                                <div >
-
-                                    <input type="text" className="manage-input" placeholder="New Password" />
-                                </div>
-                            </Form.Group>
-                            <Form.Group >
-                                <div >
-
-                                    <input type="password" className="manage-input" placeholder="Old Password" />
-                                </div>
-                            </Form.Group>
-                            <Form.Group >
-                                <div >
-                                    <input type="password" className="manage-input" placeholder="Confirm Old Password" />
-                                </div>
-                            </Form.Group>
-
-
-
-
-                        </Form>
-                        <button className="managebtn mt30" style={{ backgroundColor: "#c878fa", borderStyle: "none" }}
-                            variant="primary" type="submit"  >
-                            Change My Password
-                    </button>
-
-
-                    </Card>
-                }
-
-
-
-
-
-
-            </div>
-        )
-    }
+    return (
+        <Typography
+            component="div"
+            role="tabpanel"
+            hidden={value !== index}
+            id={`full-width-tabpanel-${index}`}
+            aria-labelledby={`full-width-tab-${index}`}
+            {...other}
+        >
+            <Box p={3}>{children}</Box>
+        </Typography>
+    );
 }
 
+
+function a11yProps(index) {
+    return {
+        id: `full-width-tab-${index}`,
+        'aria-controls': `full-width-tabpanel-${index}`,
+    };
+}
+
+const useStyles = makeStyles(theme => ({
+    root: {
+        backgroundColor: theme.palette.background.paper,
+        borderRadius: '10px',
+        width: '100%',
+        margin: '25px 0 25px 0'
+    },
+}));
+
+function ManagePasswordCard() {
+    const classes = useStyles();
+    const [value, setValue] = React.useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
+
+    const handleChangeIndex = index => {
+        setValue(index);
+    };
+
+    return (
+        <div className={classes.root}>
+            <AppBar style={{ borderRadius: '10px 10px 0 0' }} position="static" color="default">
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    indicatorColor="primary"
+                    textColor="primary"
+                    variant="fullWidth"
+                    aria-label="full width tabs example"
+                >
+                    <Tab style={{ outline: 'none' }} icon={<EmailIcon />} label="Manage Email" {...a11yProps(0)} />
+                    <Tab style={{ outline: 'none' }} icon={<LockIcon />} label="Manage Password" {...a11yProps(1)} />
+                </Tabs>
+            </AppBar>
+            <TabPanel value={value} index={0}>
+                <ManageEmail />
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+                <ManagePassword />
+            </TabPanel>
+        </div>
+    );
+}
 
 
 

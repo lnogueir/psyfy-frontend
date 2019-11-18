@@ -24,7 +24,9 @@ class LoginCard extends React.Component {
     return (this.state.show_success ?
       <SweetAlert show={this.state.show_success}
         title={this.state.forgot_mode ? "Email Sent" : "Welcome back!"}
-        text="A link to reset your password has been sent to your email."
+        text={this.state.forgot_mode ?
+          "A link to reset your password has been sent to your email." :
+          "You have successfully logged in."}
         type='success'
         showCancelButton={false}
         showConfirmButton={false}

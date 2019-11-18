@@ -16,9 +16,7 @@ class NavbarUserButtonDropdown extends React.Component {
     req.POST(endpoint, JSON.stringify(data))
       .then(response => {
         if (response.status === 204) {
-          window.localStorage.clear();
-          window.sessionStorage.clear()
-          window.location.reload();
+          Utils.logout()
         } else {
           alert(Utils.ERROR_MESSAGE)
         }

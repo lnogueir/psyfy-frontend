@@ -10,7 +10,8 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-size: cover;
-  background-image:url('main_background.jpg');
+  background-image:url('main_background_blur.jpg');
+  
 }
 
 
@@ -187,7 +188,7 @@ body {
 }
 
 .req-tabs{
-  height:100%; background:#333; border-radius: 8px 0 0 8px;
+  height:100%; background:#333; border-radius: .25em 0 0 .25em;
 }
 
 .next-tab-icon,.next-month-calendar:hover{
@@ -1154,6 +1155,11 @@ div.week-select .week-options-wrap .week-options:hover{
   opacity:1
 }
 
+.card{
+  border-radius:0;
+}
+
+
 .set-start-block:hover{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   background: #a9ed9d;
@@ -1571,7 +1577,7 @@ div.busy-on-hover:hover > i{
   width: 73%;
   margin: 50px;
   border-color:lightgray;
-  border-radius:8px;
+  border-radius:.25em;
 }
 
 @media only screen and (max-width: 1024px) {
@@ -1579,7 +1585,12 @@ div.busy-on-hover:hover > i{
     width:90%;
     margin:50px 20px 50px 20px;
   }
+  .card{
+    border-radius:4px;
+  }
 }
+
+
 
 .login-card-title{ 
   color:#111; 
@@ -1611,7 +1622,7 @@ div.busy-on-hover:hover > i{
 
 @media only screen and (max-width: 766px) {
   .req-tabs{
-    border-radius: 8px 8px 0 0;
+    border-radius: .25em .25em 0 0;
   }
   .req-tab > p{
     flex:4;
@@ -1699,5 +1710,4 @@ div.busy-on-hover:hover > i{
   100% {
     transform: rotate(360deg);
   }
-
 }

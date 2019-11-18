@@ -10,50 +10,53 @@ import CalendarPage from './components/Calendar/CalendarPage'
 import ManageCredentialsPage from './components/ManageCredentials/ManageCredentialsPage'
 import './assets/common_style.css'
 import ResetPasswordPage from './components/ResetPasswordPage'
+import Loading from './components/Loading'
 
 
 
-class App extends Component {
+class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      page_title: null,
-      is_authorized: (
-        (window.localStorage.getItem('loggedUser') !== null)
-        ||
-        (window.sessionStorage.getItem('loggedUser') !== null)
-      )
+      isAuthorized: undefined
     }
   }
 
+  componentDidMount = async () => {
+    let is_authorized = await Utils.isAuth()
+    this.setState({ isAuthorized: is_authorized })
+  }
 
   render() {
+    const isAuthorized = this.state.isAuthorized
     return (
       <Router>
         <PageTemplate>
-          <Switch>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-            <Route
-              exact
-              path="/request_account"
-              render={props => <RequestAccountPage history={props.history} />}
-            />
-            <PrivateRoute path={"/overview"} is_authorized={this.state.is_authorized}>
-              <OverviewPage />
-            </PrivateRoute>
-            <PrivateRoute path={"/manage_credentials"} is_authorized={this.state.is_authorized}>
-              <ManageCredentialsPage />
-            </PrivateRoute>
-            <PrivateRoute path="/calendar" is_authorized={this.state.is_authorized}>
-              <CalendarPage />
-            </PrivateRoute>
-            <Route
-              path={"/reset_password/:token"}
-              render={props => <ResetPasswordPage {...props} />}
-            />
-          </Switch>
+          {typeof isAuthorized === 'undefined' ? <Loading /> :
+            <Switch>
+              <Route exact path="/">
+                <HomePage />
+              </Route>
+              <Route
+                exact
+                path="/request_account"
+                render={props => <RequestAccountPage history={props.history} />}
+              />
+              <PrivateRoute path={"/overview"} is_authorized={isAuthorized}>
+                <OverviewPage />
+              </PrivateRoute>
+              <PrivateRoute path={"/manage_credentials"} is_authorized={isAuthorized}>
+                <ManageCredentialsPage />
+              </PrivateRoute>
+              <PrivateRoute path="/calendar" is_authorized={isAuthorized}>
+                <CalendarPage />
+              </PrivateRoute>
+              <Route
+                path={"/reset_password/:token"}
+                render={props => <ResetPasswordPage {...props} />}
+              />
+            </Switch>
+          }
         </PageTemplate>
       </Router>
     )

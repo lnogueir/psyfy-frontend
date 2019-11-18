@@ -48,8 +48,8 @@ class Utils {
   }
 
   static getLoggedUser() {
-    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
-    return JSON.parse(correct_storage)
+    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser') || null
+    return correct_storage != null && JSON.parse(correct_storage)
   }
 
 
@@ -196,6 +196,24 @@ class Utils {
       }
     }
   }
+
+  static logout() {
+    window.localStorage.clear();
+    window.sessionStorage.clear()
+    window.location.reload(true);
+  }
+
+  static async isAuth() {
+    const loggedUser = Utils.getLoggedUser()
+    if (loggedUser) {
+      var req = new Utils.Request()
+      const endpoint = '/site_users/checkTokenValidation'
+      let response = await req.POST(endpoint, JSON.stringify({ "access_token": loggedUser.token }))
+      return response.status == 200
+    }
+    return false
+  }
+
 
   static listenToStorageSet(handler) {
     if (typeof handler !== "function") {

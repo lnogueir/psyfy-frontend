@@ -179,7 +179,7 @@ class RequestAccountCard extends React.Component {
                       }
                       <button className="logbtn mt10" onClick={this.performRequestAccount}>
                         Request Account
-                              </button>
+                      </button>
                     </React.Fragment>
                 }
               </div>
