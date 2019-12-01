@@ -5,8 +5,7 @@ import Overlay from '../Overlay'
 import DayScheduleOverlay from './DayScheduleOverlay'
 import WeekScheduleOverlay from './WeekScheduleOverlay'
 import { MdArrowForward } from 'react-icons/md'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt } from '@fortawesome/free-solid-svg-icons'
+import GeneralEditIcon from '../GeneralEditIcon'
 
 
 class Calendar extends React.Component {
@@ -18,7 +17,6 @@ class Calendar extends React.Component {
       day: null,
       calendar_date: { month: undefined, year: undefined },
       week_days: undefined
-      // is_loading:true
     }
     this.updateState = Utils.updateStateField.bind(this)
   }
@@ -64,14 +62,13 @@ class Calendar extends React.Component {
                 <React.Fragment></React.Fragment>
           }
         </Overlay>
-        <div className="card flex-center ml10 mr10">
+        <div style={{ borderRadius: '.25em' }} className="card flex-center ml10 mr10">
           <div className="card-header justify-between">
-            <h3>{Utils.MONTHS[this.state.calendar_date.month]}, {this.state.calendar_date.year}</h3>
-            <span onClick={() => this.setState({ day: undefined, show_week: true })} className="mt9 general-edit-icon cursor-pointer fweight-700">
-              Monthly Common Times
-              &nbsp;&nbsp;
-                    <FontAwesomeIcon icon={faPencilAlt} />
-            </span>
+            <span style={{ fontSize: '22px' }}>{Utils.MONTHS[this.state.calendar_date.month]}, {this.state.calendar_date.year}</span>
+            <GeneralEditIcon
+              is_edit={false}
+              onClick={() => this.setState({ day: undefined, show_week: true })}
+            />
           </div>
           <table className="table table-bordered table-calendar-responsive table-fixed" id="calendar">
             <thead>

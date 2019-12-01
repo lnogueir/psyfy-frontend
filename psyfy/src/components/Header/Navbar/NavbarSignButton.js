@@ -1,10 +1,9 @@
 import React from 'react';
-import Badge from 'react-bootstrap/Badge';
 import LoginCard from '../../Login/LoginCard';
 import Overlay from '../../Overlay';
-import Utils from '../../../assets/js/Utils';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
+import NavbarSignButtonDropdown from './NavbarSignButtonDropdown';
 
 class NavbarSignButton extends React.Component {
   constructor(props) {
@@ -12,6 +11,7 @@ class NavbarSignButton extends React.Component {
     this.state = {
       show_login_card: false
     }
+    this.showLoginCard = () => this.setState({ show_login_card: true })
   }
 
   toggleLogin = () => {
@@ -29,8 +29,11 @@ class NavbarSignButton extends React.Component {
         >
           <LoginCard />
         </Overlay>
-        <div className="justify-around">
-          <p className="mt14 mr15 silver-color d-none d-sm-block">Are you a doctor?</p>
+        <div className="d-sm-none">
+          <NavbarSignButtonDropdown showLoginCard={this.showLoginCard} />
+        </div>
+        <div className="justify-around d-none d-sm-flex">
+          <p className="mt14 mr15 silver-color">Are you a doctor?</p>
           <a
             href="#"
             onClick={e => {
@@ -44,7 +47,7 @@ class NavbarSignButton extends React.Component {
           <Link to="/request_account">
             <Button style={{ height: '52px' }} variant="outline-light">
               Request Account
-                  </Button>
+            </Button>
           </Link>
         </div>
       </React.Fragment>

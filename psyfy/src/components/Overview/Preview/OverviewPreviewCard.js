@@ -32,7 +32,7 @@ class OverviewPreviewCard extends React.Component {
         </Overlay>
         <Card id="overview-preview-card">
           <Card.Header as="h4">
-            {this.props.fields.contact_info.full_name}
+            <span>{this.props.fields.contact_info.full_name}</span>
             <GeneralEditIcon
               is_edit={false}
               onClick={() => this.toggleDisplay('should_display_edit', true)}
@@ -41,7 +41,7 @@ class OverviewPreviewCard extends React.Component {
           <Card.Body>
             <div>
               <div style={{ lineHeight: "25px" }} className="justify-between">
-                <span className="fweight-700">{this.props.fields.qualification_info.degree} | Verified</span>
+                <span className="fweight-700">{this.props.fields.qualification_info.degree}</span>
                 <i>{this.props.fields.qualification_info.specialize}</i>
               </div>
               <br />
@@ -50,7 +50,6 @@ class OverviewPreviewCard extends React.Component {
                 icon={faMapPin}
               />
               &nbsp;&nbsp;{this.props.fields.contact_info.address}
-              <i className="float-right align-vertical-2">3km away</i>
             </div>
             <div className="mt20 justify-around">
               <Button

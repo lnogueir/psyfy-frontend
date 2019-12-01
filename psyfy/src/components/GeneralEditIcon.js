@@ -1,14 +1,20 @@
 import React from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPencilAlt, faSave } from '@fortawesome/free-solid-svg-icons'
+import EditIcon from '@material-ui/icons/Edit';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import Fab from '@material-ui/core/Fab';
 
-function GeneralEditIcon(props){
+function GeneralEditIcon(props) {
   return (
-    <FontAwesomeIcon
-      className="float-right pointer fs20 general-edit-icon"
-      icon={props.is_edit ? faSave : faPencilAlt}
+    <Fab
+      className="float-right"
+      style={{ outline: 'none' }}
+      size="small"
       onClick={props.onClick}
-    />
+      color={props.is_edit ? 'secondary' : "default"}
+      aria-label="edit"
+    >
+      {props.is_edit ? <SaveAltIcon /> : <EditIcon />}
+    </Fab>
   )
 }
 
