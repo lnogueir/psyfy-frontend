@@ -1,13 +1,11 @@
 import React from 'react';
 import OverviewPreview from './Preview/OverviewPreview';
-import PageTemplate from '../PageTemplate';
 import Loading from '../Loading';
 import OverviewTrailer from './OverviewTrailer';
 import OverviewBill from './OverviewBill';
 import OverviewGalery from './OverviewGalery';
 import OverviewSpeciality from './OverviewSpeciality';
 import OverviewClientFocus from './OverviewClientFocus'
-import Overlay from '../Overlay';
 import Utils from '../../assets/js/Utils';
 
 
@@ -35,9 +33,15 @@ class OverviewPage extends React.Component {
         },
       },
       trailer_id: null,
+      galery: [],
+      finance: null,
+      client_focus: null,
+      specialities: null
     }
     this.updateStateField = Utils.updateStateField.bind(this)
   }
+
+
 
 
   updateFieldPreviewSummary = (summary) => {
@@ -97,7 +101,7 @@ class OverviewPage extends React.Component {
 
   componentDidMount = () => {
     const loggedUser = Utils.getLoggedUser()
-    const endpoint = `/site_profiles/${loggedUser.id}?filter[include]=contactInformation&filter[include]=media&filter[include]=education`
+    const endpoint = `/site_profiles/${loggedUser.id}?filter[include]=media&filter[include]=finance&filter[include]=clientFocus&filter[include]=availableTimes&filter[include]=contactInformation&filter[include]=education`
     var req = new Utils.Request()
     req.setAuthorization(loggedUser.token)
     req.GET(endpoint)
@@ -108,24 +112,27 @@ class OverviewPage extends React.Component {
           if (elem.media_type === "profile_video_trailer") { this.state.trailer_id = elem.source_url }
           else if (elem.media_type === "profile_image") {
             this.state.preview_info.image_uri = elem.source_url + `?${Utils.getRandomNumber()}`
+          } else if (elem.media_type === "gallery_image") {
+            this.state.galery.push({ description: elem.description, url: elem.source_url, id: elem.id })
           }
         })
         this.state.preview_info.card_info.qualification_info = this.initQualificationInfo(this.state, responseJson.education)
         this.state.preview_info.card_info.contact_info = this.initContactInfo(this.state, responseJson.contactInformation)
         this.state.preview_info.summary = responseJson.summary
+        this.state.finance = responseJson.finance
+        this.state.client_focus = responseJson.clientFocus
+        this.state.specialities = responseJson.specialities
+        console.log(responseJson.specialities)
         this.updateStateField('is_fetching', false)
       })
       .catch(error => {
-        console.log(error.message)
-        alert(Utils.ERROR_MESSAGE)
+        alert(Utils.ERROR_MESSAGE + error.message)
       })
   }
-
 
   componentWillUnmount = () => {
     Utils.Request.abortProcesses()
   }
-
 
   render() {
     return (
@@ -134,7 +141,8 @@ class OverviewPage extends React.Component {
         <Loading />
         :
         <React.Fragment>
-          <div className="row m5">
+          <h1 className="ml15 text-bold-white">My Overview</h1>
+          <div className="row m15">
             <div className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
               <section>
                 <OverviewPreview
@@ -151,13 +159,19 @@ class OverviewPage extends React.Component {
                   }
                 />
                 <div className="d-flex justify-content-center">
-                  <OverviewGalery />
+                  <OverviewGalery
+                    galery={this.state.galery}
+                    onFieldUpdate={this.updateStateField}
+                  />
                 </div>
               </section>
             </div>
             <div className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap">
               <div className="d-flex justify-content-center">
-                <OverviewBill />
+                <OverviewBill
+                  finance={this.state.finance}
+                  onFieldUpdate={this.updateStateField}
+                />
               </div>
               <div className="d-flex justify-content-center">
                 <OverviewTrailer
@@ -167,13 +181,19 @@ class OverviewPage extends React.Component {
               </div>
               <div align="center">
                 <div className="column-wrap-lg column-wrap-sm d-flex justify-content-center responsive-md-width">
-                  <OverviewSpeciality />
-                  <OverviewClientFocus />
+                  <OverviewSpeciality
+                    specialities={this.state.specialities}
+                    onFieldUpdate={this.updateStateField}
+                  />
+                  <OverviewClientFocus
+                    client_focus={this.state.client_focus}
+                    onFieldUpdate={this.updateStateField}
+                  />
                 </div>
               </div>
             </div>
           </div>
-        </React.Fragment>
+        </React.Fragment >
     )
   }
 

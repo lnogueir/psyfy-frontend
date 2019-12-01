@@ -58,7 +58,7 @@ class TherapistOverviewPreviewImage extends React.Component {
 
   render() {
     return (
-      <Card style={{ height: 'auto' }} id="therapist-card">
+      <Card style={{ height: 'auto', borderRadius: '.25em 0 0 0' }} id="therapist-card">
         <Card.Img style={{ height: '100%' }} alt="Profile image" src={this.state.preview_src == null ? this.props.image_uri != null ? this.props.image_uri : require("../../../assets/images/profile_fill.png") : this.state.preview_src} />
         <div className="hover-img">
           <div>
@@ -67,7 +67,7 @@ class TherapistOverviewPreviewImage extends React.Component {
                 ?
                 <label className="mt40">
                   <FontAwesomeIcon className="camera-icon" icon={faCamera} />
-                  <input type="file" onChange={this.handleChangeImage} />
+                  <input onClick={e => e.target.value = null} type="file" onChange={this.handleChangeImage} />
                 </label>
                 :
                 <div>

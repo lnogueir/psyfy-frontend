@@ -28,16 +28,16 @@ const useStyles = makeStyles(theme => ({
         }
     },
     button: {
-        width: 'calc(150px + 35%)',
+        width: 'calc(120px + 15%)',
         margin: theme.spacing(2),
         '&:focus': { outline: 'none' }
     },
     spinner: {
         width: 'calc(150px + 35%)',
-        textAlign: 'center'
-    },
-    margin: {
-        margin: theme.spacing(2)
+        position: 'relative',
+        top: '10px',
+        left: '50%',
+        transform: 'translateX(-50%)'
     }
 }));
 
@@ -61,12 +61,14 @@ function ResetPasswordPage(props) {
                 .then(response => {
                     if (response.status != 204) {
                         alert(Utils.ERROR_MESSAGE + 'status: ' + response.status)
+                        setIsLoading(false)
+                    } else {
+                        setIsSuccess(true)
+                        setIsLoading(false)
+                        setTimeout(() => {
+                            window.location.reload(true);
+                        }, 800)
                     }
-                    setIsSuccess(true)
-                    setIsLoading(false)
-                    setTimeout(() => {
-                        window.location.reload(true);
-                    }, 800)
                 }).catch(err => {
                     setIsLoading(false)
                     alert(Utils.ERROR_MESSAGE + err)
@@ -75,7 +77,7 @@ function ResetPasswordPage(props) {
     }
 
     return (
-        <div style={{ minHeight: '90vh' }}>
+        <div align="center" className="forgot-password-body">
             <SweetAlert
                 show={isSuccess}
                 title={"Password Reset Successfully"}
@@ -84,36 +86,39 @@ function ResetPasswordPage(props) {
                 showCancelButton={false}
                 showConfirmButton={false}
             />
-            <TextField
-                label="New Password"
-                className={classes.textField}
-                type={isVisible ? "text" : "password"}
-                name="new_password"
-                margin="normal"
-                variant="filled"
-                value={newPassword}
-                onChange={e => { setNewPassword(e.target.value) }}
-                InputProps={{
-                    endAdornment: (
-                        <InputAdornment
-                            onClick={() => setIsVisible(!isVisible)}
-                            className={classes.icon}
-                            position="end"
-                        >
-                            {isVisible ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
-                        </InputAdornment>
-                    ),
-                }}
-            />
-            {isLoading ?
-                <div className={classes.spinner}>
-                    <Spinner className={classes.margin} animation="border" role="status" />
-                </div>
-                :
-                <Button onClick={handleReset} type="submit" variant="contained" className={classes.button}>
-                    Update Password
+            <div className="flex-column">
+                <h2 className="text-bold-white">Reset Password</h2>
+                <TextField
+                    label="New Password"
+                    className={classes.textField}
+                    type={isVisible ? "text" : "password"}
+                    name="new_password"
+                    margin="normal"
+                    variant="filled"
+                    value={newPassword}
+                    onChange={e => { setNewPassword(e.target.value) }}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment
+                                onClick={() => setIsVisible(!isVisible)}
+                                className={classes.icon}
+                                position="end"
+                            >
+                                {isVisible ? <VisibilityOnIcon /> : <VisibilityOffIcon />}
+                            </InputAdornment>
+                        ),
+                    }}
+                />
+                {isLoading ?
+                    <div className={classes.spinner}>
+                        <Spinner className={classes.margin} animation="border" role="status" />
+                    </div>
+                    :
+                    <Button onClick={handleReset} type="submit" variant="contained" className={classes.button}>
+                        Reset Password
                 </Button>
-            }
+                }
+            </div>
         </div>
     )
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { FaUserMd } from 'react-icons/fa';
 import { MdLocationOn, MdEmail, MdContactPhone } from 'react-icons/md';
 import AutocompleteInput from '../../AutocompleteInput'
-
+import NumberFormat from 'react-number-format'
 
 function InfoTab(props) {
 
@@ -28,7 +28,7 @@ function InfoTab(props) {
           <input
             value={props.email}
             onChange={e => props.onChange('email', e.target.value)}
-            type="text"
+            type="email"
             className="login-input"
             placeholder="Login Email"
           />
@@ -36,12 +36,12 @@ function InfoTab(props) {
         <div className="mb-3 col-sm-6">
           <i
             className="login-input-icon" ><MdContactPhone /></i>
-          <input
-            value={props.number}
+          <NumberFormat
             onChange={e => props.onChange('number', e.target.value)}
-            type="text"
+            placeholder="123-456-7890"
+            value={props.number}
+            format="###-###-####"
             className="login-input"
-            placeholder="Contact Number"
           />
         </div>
         <div className="mb-3 col-sm-6">

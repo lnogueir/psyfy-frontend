@@ -12,7 +12,6 @@ import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import $ from 'jquery'
 import Main from '../../assets/js/request_account'
 import SweetAlert from 'sweetalert2-react';
-import { Route } from 'react-router-dom'
 import ONE from '../../assets/images/one.png'
 import TWO from '../../assets/images/two.png'
 import THREE from '../../assets/images/three.png'
@@ -36,6 +35,10 @@ class RequestAccountCard extends React.Component {
       is_loading: false
     }
     this.updateStateField = Utils.updateStateField.bind(this);
+  }
+
+  componentWillUnmount = () => {
+    Utils.Request.abortProcesses()
   }
 
   componentDidMount = () => Main()

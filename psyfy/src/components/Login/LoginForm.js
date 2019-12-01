@@ -16,6 +16,10 @@ class LoginForm extends React.Component {
         }
     }
 
+    componentWillUnmount = () => {
+        Utils.Request.abortProcesses()
+    }
+
     handleLogin = event => {
         this.setState({ is_loading: true })
         event.preventDefault()

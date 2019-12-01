@@ -1,17 +1,36 @@
-import React , {Component} from 'react'
+import React, { useEffect, useState } from 'react'
 import { Route, Redirect } from 'react-router-dom'
+import Utils from '../assets/js/Utils'
+import Loading from './Loading'
 
 
-function PrivateRoute(props){
-  return(
-      <Route exact path={props.path}>
+class PrivateRoute extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isAuth: undefined
+    }
+  }
+
+  componentDidMount = async () => {
+    const isAuth = await Utils.isAuth()
+    this.setState({ isAuth })
+  }
+
+  render() {
+    return (
+      typeof this.state.isAuth === 'undefined' ?
+        <Loading />
+        :
+        <Route exact path={this.props.path}>
           {
-            props.is_authorized
-            ? props.children
-            : <Redirect to='/' />
+            this.state.isAuth
+              ? this.props.children
+              : <Redirect to='/' />
           }
-       </Route>
-  )
+        </Route>
+    )
+  }
 }
 
 export default PrivateRoute;
