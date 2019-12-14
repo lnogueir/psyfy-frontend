@@ -52,6 +52,11 @@ class Utils {
     return correct_storage != null && JSON.parse(correct_storage)
   }
 
+  static getSplittedFullName(full_name) {
+    const splitted_name = (full_name || '').split(' ')
+    const name = splitted_name.length > 2 ? splitted_name.splice(0, 2).join(' ') : splitted_name.join(' ')
+    return name
+  }
 
   static getDivParent(elem) {
     while (elem && elem.tagName !== 'DIV') elem = elem.parentNode;

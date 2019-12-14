@@ -19,8 +19,8 @@ class AboutTab extends React.Component {
   render() {
     return (
       <div align="left">
-        <h1>Tell us about you</h1>
-        <p style={{ lineHeight: "3px" }} className="text-muted">This will help us confirm that you are a certified therapist.</p>
+        <h1 className="req-tab-title">Tell us about you</h1>
+        <p className="text-muted">This will help us confirm that you are a certified therapist.</p>
         <div className="row">
           <div className="col-sm-12 col-md-12 col-lg-12">
             <p

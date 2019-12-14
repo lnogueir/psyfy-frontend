@@ -1,13 +1,24 @@
 import React from 'react'
 
-function WelcomeTab(props){
-  return(
+function WelcomeTab(props) {
+  return (
     <div align="left">
-      <h1>Welcome to PsyCare</h1>
-      <p>We are happy that you are interested in becoming a PsyCare therapist!</p>
-      <p>PsyCare is all about helping those with mental health issues, and we need you to be able to help those in need.</p>
-      <p>More text here! publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-      <p className="mt20">If you believe that our company ideal is in line with yours, you are welcome to proceed.</p>
+      <h1 className="req-tab-title">Welcome to PsyCare</h1>
+      <p>Welcome to PsyCare! We are very happy to know you are interested in joining us.</p>
+      <p>In order to get your account, we must first make sure you are a certified doctor.</p>
+      <p>
+        But don’t worry, if you are a therapist, your account will get approved!
+        <br />
+        Just follow these steps:
+      </p>
+      <ol>
+        <li>Fill in your contact information. The information you provide there will be initialized on your account and we will use in case we need to contact you.</li>
+        <li>Tell us about you, about what you’ve worked with and accomplishments. We also let you upload attachments to help on your application.</li>
+        <li>Accept the terms and agreements.</li>
+      </ol>
+      <p>
+        You are all set. We will review your application and let you know about your request status!
+      </p>
     </div>
   )
 }

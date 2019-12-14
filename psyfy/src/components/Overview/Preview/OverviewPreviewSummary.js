@@ -10,7 +10,7 @@ class OverviewPreviewSummary extends React.Component {
     super(props)
     this.request = new Utils.Request()
     this.state = {
-      is_edit: false
+      is_edit: false,
     }
   }
 
@@ -20,6 +20,8 @@ class OverviewPreviewSummary extends React.Component {
 
   componentDidMount = () => {
     this.refs.summaryNode.innerHTML = this.props.fields;
+    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
+    this.setState({ therapist_name: JSON.parse(correct_storage).name })
   }
 
   editSummary = () => {
@@ -44,8 +46,6 @@ class OverviewPreviewSummary extends React.Component {
   }
 
   render() {
-    const correct_storage = window.localStorage.getItem('loggedUser') || window.sessionStorage.getItem('loggedUser')
-    const therapist_name = JSON.parse(correct_storage).name
     return (
       <Card style={{ width: '55em' }}>
         <Card.Header as="h4">
@@ -72,7 +72,7 @@ class OverviewPreviewSummary extends React.Component {
             >
             </div>
             <footer className="blockquote-footer">
-              <cite title="Source Title">{therapist_name}</cite>
+              <cite>{this.props.therapist_name}</cite>
             </footer>
           </blockquote>
         </div>

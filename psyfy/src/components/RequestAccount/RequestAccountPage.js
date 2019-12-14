@@ -6,7 +6,7 @@ class RequestAccountPage extends React.Component {
   render() {
     return (
       <div>
-        <h1 className="text-bold-white ml15">Request your account</h1>
+        <h1 className="text-bold-white ml17">Request your account</h1>
         <div align="center">
           <RequestAccountCard
             history={this.props.history}

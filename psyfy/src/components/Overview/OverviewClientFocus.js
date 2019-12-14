@@ -144,6 +144,7 @@ class OverviewClientFocus extends React.Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          color="primary"
                           onChange={() => {
                             let dummy_modality = this.state.modality
                             dummy_modality.individual.is_active = !dummy_modality.individual.is_active
@@ -159,6 +160,7 @@ class OverviewClientFocus extends React.Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          color="primary"
                           onChange={() => {
                             let dummy_modality = this.state.modality
                             dummy_modality.group.is_active = !dummy_modality.group.is_active
@@ -174,6 +176,7 @@ class OverviewClientFocus extends React.Component {
                     <FormControlLabel
                       control={
                         <Checkbox
+                          color="primary"
                           onChange={() => {
                             let dummy_modality = this.state.modality
                             dummy_modality.video.is_active = !dummy_modality.video.is_active
