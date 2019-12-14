@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const color = '#CD594A'
+const color = '#CD594A';
 
 function putColor() {
   $('.bg-psyfy-navbar').css('background', color)

@@ -42,8 +42,6 @@ class OverviewPage extends React.Component {
   }
 
 
-
-
   updateFieldPreviewSummary = (summary) => {
     var preview_info = Object.assign({}, this.state.preview_info)
     preview_info.summary = summary
@@ -122,7 +120,6 @@ class OverviewPage extends React.Component {
         this.state.finance = responseJson.finance
         this.state.client_focus = responseJson.clientFocus
         this.state.specialities = responseJson.specialities
-        console.log(responseJson.specialities)
         this.updateStateField('is_fetching', false)
       })
       .catch(error => {
@@ -141,9 +138,9 @@ class OverviewPage extends React.Component {
         <Loading />
         :
         <React.Fragment>
-          <h1 className="ml15 text-bold-white">My Overview</h1>
+          <h1 className="ml17 text-bold-white">My Overview</h1>
           <div className="row m15">
-            <div className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
+            <div style={{ marginTop: 0 }} className="col-xs-12 col-md-12 col-lg-7 overview-preview-wrap">
               <section>
                 <OverviewPreview
                   fields={this.state.preview_info}
@@ -166,7 +163,7 @@ class OverviewPage extends React.Component {
                 </div>
               </section>
             </div>
-            <div className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap">
+            <div style={{ marginTop: 0 }} className="col-xs-12 col-md-12 col-lg-5 overview-trailer-wrap">
               <div className="d-flex justify-content-center">
                 <OverviewBill
                   finance={this.state.finance}

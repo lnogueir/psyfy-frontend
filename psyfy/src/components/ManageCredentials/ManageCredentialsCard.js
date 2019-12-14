@@ -1,5 +1,4 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -9,6 +8,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import EmailIcon from '@material-ui/icons/Email';
 import ManageEmail from './ManageEmail'
 import ManagePassword from './ManagePassword'
+import Paper from '@material-ui/core/Paper';
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -28,52 +28,44 @@ function TabPanel(props) {
 }
 
 
-function a11yProps(index) {
-    return {
-        id: `full-width-tab-${index}`,
-        'aria-controls': `full-width-tabpanel-${index}`,
-    };
-}
-
-const useStyles = makeStyles(theme => ({
-    root: {
-        backgroundColor: theme.palette.background.paper,
-        borderRadius: '10px',
-        width: '100%',
-        margin: '25px 0 25px 0'
-    },
-}));
-
 function ManagePasswordCard() {
-    const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [isPassword, setIsPassword] = React.useState(false)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
 
     return (
-        <div className={classes.root}>
-            <AppBar style={{ borderRadius: '10px 10px 0 0' }} position="static" color="default">
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    variant="fullWidth"
-                    aria-label="full width tabs example"
-                >
-                    <Tab style={{ outline: 'none' }} icon={<EmailIcon />} label="Manage Email" {...a11yProps(0)} />
-                    <Tab style={{ outline: 'none' }} icon={<LockIcon />} label="Manage Password" {...a11yProps(1)} />
-                </Tabs>
-            </AppBar>
-            <TabPanel value={value} index={0}>
-                <ManageEmail />
-            </TabPanel>
-            <TabPanel value={value} index={1}>
+        <Paper className="manage-credentials-paper position-relative">
+            <div className="d-lg-none">
+                <AppBar style={{ borderRadius: '.25em .25em 0 0' }} position="static" color="default">
+                    <Tabs
+                        value={value}
+                        onChange={handleChange}
+                        indicatorColor={isPassword ? 'secondary' : 'primary'}
+                        textColor={isPassword ? 'secondary' : 'primary'}
+                        variant="fullWidth"
+                    >
+                        <Tab onClick={() => setIsPassword(false)} style={{ outline: 'none' }} icon={<EmailIcon />} label="Manage Email" />
+                        <Tab onClick={() => setIsPassword(true)} style={{ outline: 'none' }} icon={<LockIcon />} label="Manage Password" />
+                    </Tabs>
+                </AppBar>
+                <TabPanel value={value} index={0}>
+                    <ManageEmail />
+                </TabPanel>
+                <TabPanel value={value} index={1}>
+                    <ManagePassword />
+                </TabPanel>
+            </div>
+            <div className="d-none d-lg-flex p30 justify-around">
                 <ManagePassword />
-            </TabPanel>
-        </div>
+                <ManageEmail />
+            </div>
+            <div className="decoration-manage-credentials-left d-lg-none"></div>
+            <div className="decoration-manage-credentials-center d-none d-lg-block"></div>
+            <div className="decoration-manage-credentials-right"></div>
+        </Paper>
     );
 }
 

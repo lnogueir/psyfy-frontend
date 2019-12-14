@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     textField: {
         margin: theme.spacing(2),
         width: 'calc(150px + 35%)',
-        borderRadius: '5px',
+        borderRadius: '5px 5px 0 0',
         background: 'white',
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)',
         transition: 'all 0.3s cubic- bezier(.25, .8, .25, 1)',
@@ -97,10 +97,10 @@ function ManagePassword() {
             />
             <form onSubmit={handleUpdate}>
                 <div>
-                    <h2>Manage Password</h2>
+                    <h1 className="req-tab-title">Manage Password</h1>
                     <b className="text-muted">Note:</b>
                     &nbsp;
-                <i>This action will log you out and permantly change your password.</i>
+                    <i>This action will permantly change your password.</i>
                 </div>
                 <div className="mt20 mb20">
                     <TextField
@@ -112,6 +112,7 @@ function ManagePassword() {
                         autoComplete="current-password"
                         margin="normal"
                         variant="filled"
+                        color="secondary"
                         name="old_password"
                     />
                     <br />
@@ -120,6 +121,7 @@ function ManagePassword() {
                         className={classes.textField}
                         type={isVisible ? "text" : "password"}
                         name="new_password"
+                        color="secondary"
                         margin="normal"
                         variant="filled"
                         InputProps={{

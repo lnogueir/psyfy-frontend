@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBriefcase, faLightbulb, faCertificate, faGraduationCap } from '@fortawesome/free-solid-svg-icons'
 import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
 import Utils from '../../../assets/js/Utils'
+import NumberFormat from 'react-number-format'
 
 class EditPreviewCardOverlayQualification extends React.Component {
   constructor(props) {
@@ -116,13 +117,15 @@ class EditPreviewCardOverlayQualification extends React.Component {
               <Form.Label>
                 <FontAwesomeIcon size="2x" icon={faBriefcase} />
                 &nbsp;&nbsp;&nbsp;
-                <b>Years of Experience</b>
+                <b>Years of Practice</b>
               </Form.Label>
-              <Form.Control
-                name="experience"
+              <NumberFormat
                 onChange={e => this.props.onFieldUpdate('years_of_experience', e.target.value)}
-                placeholder="8 years"
-                value={this.props.fields.years_of_experience} />
+                placeholder="e.g 8"
+                value={this.props.fields.years_of_experience}
+                className="form-control"
+                name="experience"
+              />
             </Form.Group>
           </div>
         </div>

@@ -1,22 +1,24 @@
-import React from 'react';
+import React from 'react'
 import Card from 'react-bootstrap/Card'
-import { MdArrowForward } from 'react-icons/md'
 import WelcomeTab from './Tabs/WelcomeTab'
 import AboutTab from './Tabs/AboutTab'
 import TermsTab from './Tabs/TermsTab'
 import InfoTab from './Tabs/InfoTab'
 import Utils from '../../assets/js/Utils'
-import Spinner from 'react-bootstrap/Spinner';
-import Alert from 'react-bootstrap/Alert';
-import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import Spinner from 'react-bootstrap/Spinner'
+import Alert from 'react-bootstrap/Alert'
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
 import $ from 'jquery'
-import Main from '../../assets/js/request_account'
-import SweetAlert from 'sweetalert2-react';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import MenuIcon from '@material-ui/icons/Menu'
+import CloseIcon from '@material-ui/icons/Close'
+import Fab from '@material-ui/core/Fab'
+import SweetAlert from 'sweetalert2-react'
 import ONE from '../../assets/images/one.png'
 import TWO from '../../assets/images/two.png'
 import THREE from '../../assets/images/three.png'
 import FOUR from '../../assets/images/four.png'
-
+import Paper from '@material-ui/core/Paper';
 
 class RequestAccountCard extends React.Component {
   constructor(props) {
@@ -32,8 +34,15 @@ class RequestAccountCard extends React.Component {
       files: [],
       accepted_terms: false,
       show_error: false,
-      is_loading: false
+      is_loading: false,
+      is_menu_open: false
     }
+    this.TAB_MAPPING = [
+      { img: ONE, title: "Welcome" },
+      { img: TWO, title: "Contact Info" },
+      { img: THREE, title: "About you" },
+      { img: FOUR, title: "Request Account" }
+    ]
     this.updateStateField = Utils.updateStateField.bind(this);
   }
 
@@ -41,16 +50,12 @@ class RequestAccountCard extends React.Component {
     Utils.Request.abortProcesses()
   }
 
-  componentDidMount = () => Main()
+  gotoNextTab = () => {
+    this.setState(prevState => ({ tab: prevState.tab + 1 }))
+  }
 
-  updateTab = () => {
-    var tabs = $('.req-tab')
-    for (var i = 0; i < tabs.length; i++) {
-      if ($(tabs[i]).hasClass('active-tab')) {
-        this.setState(({ tab: i }));
-        break;
-      }
-    }
+  gotoPrevTab = () => {
+    this.setState(prevState => ({ tab: prevState.tab - 1 }))
   }
 
   hasCompletedTabs = () => {
@@ -102,7 +107,16 @@ class RequestAccountCard extends React.Component {
 
   handleSuccess = () => {
     this.setState({ show_success: false })
-    this.props.history.push('/')
+    this.props.toggleDisplay()
+  }
+
+  handleTabClick = e => {
+    let element = Utils.getDivParent(e.target);
+    const new_index = $(element).index()
+    if (window.innerWidth < 767) {
+      this.toggleReqTabs()
+    }
+    this.setState({ tab: new_index })
   }
 
   getTab = () => {
@@ -128,47 +142,80 @@ class RequestAccountCard extends React.Component {
     )
   }
 
+  toggleReqTabs = () => {
+    if (this.state.is_menu_open) {
+      $('.req-tabs').removeClass('req-tabs-responsive')
+      $('.req-tabs-ori').css('display', 'none')
+      $('.left-side-req-card').css('flex', '0.4')
+    } else {
+      $('.req-tabs').addClass('req-tabs-responsive')
+      $('.req-tabs-ori').css('display', 'block')
+      $('.left-side-req-card').css('flex', '1')
+    }
+    this.setState(prevState => ({ is_menu_open: !prevState.is_menu_open }))
+  }
+
   render() {
     return (
       <React.Fragment>
         <SweetAlert show={this.state.show_success}
           title="Order processed!"
-          html={`Our staff is working on the approval of your account!<br/>An email will be sent to you within 24 hours with the response to your request.`}
+          html={`Our staff is working on the approval of your account!<br/>An email will be sent to you within 24 hours with the response to your request.<br/>If you don't recieve an email by then, please contact us @ email, and we will sort it out. Have a wonderful day!`}
           type='success'
           showCancelButton={false}
           confirmButtonColor="#9645ff"
           onConfirm={this.handleSuccess}
         />
-        <Card className="req-card shadow">
-          <div className="row">
-            <div className="col-xm-4 col-md-4 col-lg-4">
-              <div onClick={this.updateTab} className="flex-column req-tabs">
-                <div id="welcome-tab" className="req-tab active-tab">
-                  <img className="number-tab" src={ONE} />
-                  <p>Welcome!</p>
+        <Paper className="req-card shadow">
+          <div className="d-flex">
+            <div className="left-side-req-card">
+              <div className="flex-column req-tabs">
+                <div className="menu-req-div">
+                  <Fab
+                    id="menu-req-but"
+                    color="default"
+                    onClick={this.toggleReqTabs}
+                  >
+                    {this.state.is_menu_open ? <CloseIcon /> : <MenuIcon />}
+                  </Fab>
                 </div>
-                <div id="info-tab" className="req-tab">
-                  <img className="number-tab" src={TWO} />
-                  <p>Contact Info</p>
-                </div>
-                <div id="about-tab" className="req-tab">
-                  <img className="number-tab" src={THREE} />
-                  <p>About you</p>
-                </div>
-                <div id="terms-tab" className="req-tab">
-                  <img className="number-tab" src={FOUR} />
-                  <p>Request Account</p>
+                <div className="req-tabs-ori">
+                  {
+                    this.TAB_MAPPING.map((elem, i) => {
+                      return (
+                        <div key={i} onClick={this.handleTabClick} className={`req-tab${this.state.tab === i ? " active-tab" : ""}`}>
+                          <img className="number-tab" src={elem.img} />
+                          <p>{elem.title}</p>
+                        </div>
+                      )
+                    })
+                  }
                 </div>
               </div>
             </div>
-            <div className="col-xm-8 col-md-8 col-lg-8">
+            <div className="right-side-req-card">
               <div id="tab-wrapper">
                 {this.getTab()}
-                <i onClick={this.updateTab} id="next-tab" style={{ display: this.state.tab === 3 ? 'none' : 'block' }}
-                  className="m10 mb20 next-tab-icon float-right"
-                >
-                  <MdArrowForward />
-                </i>
+                <div className="mb20 float-left rotate-180">
+                  <Fab
+                    style={{ display: this.state.tab === 0 || this.state.tab === 3 ? 'none' : 'block' }}
+                    onClick={this.gotoPrevTab}
+                    size="medium"
+                    className="next-tab-icon"
+                  >
+                    <NavigateNextIcon />
+                  </Fab>
+                </div>
+                <div className="mb20 float-right">
+                  <Fab
+                    style={{ display: this.state.tab === 3 ? 'none' : 'block' }}
+                    onClick={this.gotoNextTab}
+                    size="medium"
+                    className="next-tab-icon"
+                  >
+                    <NavigateNextIcon />
+                  </Fab>
+                </div>
                 {this.state.tab != 3 ?
                   null :
                   this.state.is_loading ?
@@ -178,7 +225,7 @@ class RequestAccountCard extends React.Component {
                       {this.state.show_error &&
                         <Alert className="mt20" variant={"danger"}>
                           Sorry, you <b>must accept</b> the Terms & Conditions and <b>fill</b> all the entries on <b>Contact Info</b> tab.
-                                </Alert>
+                        </Alert>
                       }
                       <button className="logbtn mt10" onClick={this.performRequestAccount}>
                         Request Account
@@ -188,11 +235,10 @@ class RequestAccountCard extends React.Component {
               </div>
             </div>
           </div>
-        </Card>
+        </Paper>
       </React.Fragment>
     )
   }
 }
-
 
 export default RequestAccountCard;

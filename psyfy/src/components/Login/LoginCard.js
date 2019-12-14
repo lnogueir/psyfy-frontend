@@ -2,8 +2,8 @@ import React from 'react';
 import Card from 'react-bootstrap/Card';
 import SweetAlert from 'sweetalert2-react';
 import Utils from '../../assets/js/Utils';
-import { Link } from 'react-router-dom';
 import LoginForm from './LoginForm';
+import Paper from '@material-ui/core/Paper'
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 
@@ -31,7 +31,7 @@ class LoginCard extends React.Component {
         showCancelButton={false}
         showConfirmButton={false}
       /> :
-      <Card className="login-card box-shadow">
+      <Paper className="login-card box-shadow">
         <div className="mb40 mt10">
           <span className="login-card-title">{this.state.forgot_mode ? "Reset Password" : "Login to PsyCare"}</span>
         </div>
@@ -40,9 +40,21 @@ class LoginCard extends React.Component {
           <ForgotPasswordForm updateState={this.updateState} />
         }
         <div className="mt40" >
-          <Card.Footer className="bg-transparent text-muted">Are you a doctor? <Link onClick={this.props.toggleDisplay} to="/request_account"><a href="#">Request an account</a></Link></Card.Footer>
+          <Card.Footer className="bg-transparent text-muted">
+            Are you a doctor?&nbsp;
+              <a
+              href="#"
+              onClick={e => {
+                e.preventDefault()
+                this.props.toggleDisplay()
+                this.props.toggleRequest()
+              }}
+            >
+              Request an account
+            </a>
+          </Card.Footer>
         </div>
-      </Card>
+      </Paper>
     )
   }
 }

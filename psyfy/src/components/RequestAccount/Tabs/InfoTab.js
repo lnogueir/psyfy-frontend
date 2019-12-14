@@ -8,7 +8,7 @@ function InfoTab(props) {
 
   return (
     <div align="left">
-      <h1>Contact Information</h1>
+      <h1 className="req-tab-title">Contact Information</h1>
       <p className="text-muted">
         The information below will allow us to create your account and notify you when your request has been processed.
         </p>
@@ -55,7 +55,11 @@ function InfoTab(props) {
       </div>
       <br />
       <p>
-        Make sure your information is correct, this way we can back to you as soon as possible.<br />
+        Please ensure that the information provided here is correct so our admission team can reach back to you as soon as possible.
+        <br />
+        <b>Note:&nbsp;</b>if you are a <i>*Beta tester</i> you may skip the next tab as we are aware of your experience and certifications.
+        <br />
+        * You are considered a Beta tester if you've received an invitation via email from @OUREMAILDOMAIN to become a beta tester.
       </p>
     </div>
   )

@@ -101,7 +101,7 @@ class LoginForm extends React.Component {
                                 className="logbtn mt30"
                                 type="submit">
                                 Log In
-                        </button>
+                            </button>
                     }
                     {
                         this.state.show_error &&

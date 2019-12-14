@@ -6,7 +6,7 @@ function TermsTab(props) {
 
   return (
     <div align="left">
-      <h1>Terms & Conditions</h1>
+      <h1 className="req-tab-title">Terms & Conditions</h1>
       <blockquote className="blockquote">
         <div className="p10 border scrollbox-terms-cond block-horizontal-scroll">
           <h5>Purchases</h5>
@@ -43,7 +43,9 @@ function TermsTab(props) {
           </div>
       </blockquote>
       <div className="m5">
-        <Checkbox checked={props.accepted_terms} onChange={() => props.onChange('accepted_terms', !props.accepted_terms)} variant="thick" color="success" animation="smooth" shape="curve">I agree with PsyCare Terms & Conditions</Checkbox>
+        <Checkbox checked={props.accepted_terms} onChange={() => props.onChange('accepted_terms', !props.accepted_terms)} variant="thick" color="success" animation="smooth" shape="curve">
+          I agree
+        </Checkbox>
       </div>
 
     </div>

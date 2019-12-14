@@ -4,7 +4,6 @@ import PageTemplate from './components/PageTemplate'
 import PrivateRoute from './components/PrivateRoute'
 import OverviewPage from './components/Overview/OverviewPage'
 import HomePage from './components/Home/HomePage'
-import RequestAccountPage from './components/RequestAccount/RequestAccountPage'
 import CalendarPage from './components/Calendar/CalendarPage'
 import ManageCredentialsPage from './components/ManageCredentials/ManageCredentialsPage'
 import './assets/app.css'
@@ -21,11 +20,6 @@ function App() {
           <Route exact path="/">
             <HomePage />
           </Route>
-          <Route
-            exact
-            path="/request_account"
-            render={props => <RequestAccountPage history={props.history} />}
-          />
           <PrivateRoute path={"/overview"}>
             <OverviewPage />
           </PrivateRoute>

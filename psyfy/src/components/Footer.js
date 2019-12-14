@@ -1,49 +1,61 @@
 import React from 'react';
+import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import HomeIcon from '@material-ui/icons/Home';
+import ContactSupportIcon from '@material-ui/icons/ContactSupport';
+import { Link } from 'react-router-dom';
+import LOGO from '../assets/images/psycare_logo.png';
 
 function Footer() {
   return (
-    <footer className="bg-psyfy-footer page-footer mt30">
-      <div className="container-fluid text-center text-bold-white font-small">
-
+    <footer className="bg-psyfy-footer page-footer mt60">
+      <div className="container-fluid text-center font-small footer-borders">
         <div className="row">
-
-          <div className="col-sm-6 col-md-6 col-lg-6 col-sm-6">
-
-            <h5 className="text-uppercase">Footer Content</h5>
-            <p>Here you can use rows and columns to organize your footer content.</p>
-
+          <div className="col-sm-12 d-none d-sm-block d-md-none">
+            <h5 className="text-bold-white">Our Mission:</h5>
+            <blockquote className="footer-mission">
+              "At PsyCare, we strive to find the best doctor out there to provide  secure, qualified and meaningful appointments to our patients."
+              <cite> — PsyCare Inc.</cite>
+            </blockquote>
           </div>
-
-          <div className="col-sm-6 col-md-6 col-lg-6">
-
-            <h5 className="text-uppercase">Links</h5>
-
-            <ul className="list-unstyled">
+          <div style={{ left: '5%' }} className="col-md-4 col-lg-4 col-sm-6 align-text-left position-relative">
+            <h5 className="text-bold-white">Links:</h5>
+            <ul className="list-unstyled links-footer">
               <li>
-                <a href="#!">Link 1</a>
+                <Link to={'/'}>
+                  <a className="link-footer-href" href="#"><i><HomeIcon /></i>&nbsp;<span className="footer-link-txt">Home</span></a>
+                </Link>
               </li>
               <li>
-                <a href="#!">Link 2</a>
+                <a className="link-footer-href" href="#!"><i><ContactSupportIcon /></i>&nbsp;<span className="footer-link-txt">Contact Us</span></a>
               </li>
               <li>
-                <a href="#!">Link 3</a>
+                <a className="link-footer-href" href="#!"><i><LinkedInIcon /></i>&nbsp;<span className="footer-link-txt">LinkedIn</span></a>
               </li>
               <li>
-                <a href="#!">Link 4</a>
+                <a className="link-footer-href" href="#!"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
               </li>
             </ul>
-
           </div>
 
+          <div className="col-md-4 col-lg-4 d-sm-none d-md-block d-lg-block">
+            <h5 className="text-bold-white">Our Mission:</h5>
+            <blockquote className="footer-mission">
+              "At PsyCare, we strive to find the best doctor out there to provide  secure, qualified and meaningful appointments to our patients."
+              <cite> — PsyCare Inc.</cite>
+            </blockquote>
+          </div>
+          <div
+            className="col-sm-6 col-md-4 col-lg-4 mt30 mb30"
+          >
+            <img width="230" src={LOGO} />
+          </div>
         </div>
-
       </div>
-      <hr />
-      <div className="footer-copyright text-center py-3">© 2019 Copyright:
-      <a href="https://mdbootstrap.com/education/bootstrap/"> Psyfy.com</a>
+      <div className="footer-copyright text-center py-3">© 2019 Copyright:&nbsp;
+          <span className="text-bold-white">PsyCare</span>
       </div>
-
-    </footer>
+    </footer >
   )
 }
 

@@ -4,8 +4,9 @@ import Main from '../../assets/js/calendar'
 import Overlay from '../Overlay'
 import DayScheduleOverlay from './DayScheduleOverlay'
 import WeekScheduleOverlay from './WeekScheduleOverlay'
-import { MdArrowForward } from 'react-icons/md'
 import GeneralEditIcon from '../GeneralEditIcon'
+import NavigateNextIcon from '@material-ui/icons/NavigateNext'
+import Fab from '@material-ui/core/Fab'
 
 
 class Calendar extends React.Component {
@@ -85,13 +86,27 @@ class Calendar extends React.Component {
             <tbody id="calendar-body"></tbody>
           </table>
           <div className="justify-start">
-            <i id="previous" className="mb10 ml10 next-month-calendar rotate-180">
-              <MdArrowForward />
-            </i>
+            <div className="mb10 ml10 rotate-180">
+              <Fab
+                id="previous"
+                style={{ display: this.state.tab === 3 ? 'none' : 'block' }}
+                size="medium"
+                className="next-month-calendar"
+              >
+                <NavigateNextIcon />
+              </Fab>
+            </div>
             <b className="mt13">{Utils.MONTHS[this.state.calendar_date.month]}</b>
-            <i id="next" className="mb10 next-month-calendar">
-              <MdArrowForward />
-            </i>
+            <div className="mb10">
+              <Fab
+                id="next"
+                style={{ display: this.state.tab === 3 ? 'none' : 'block' }}
+                size="medium"
+                className="next-month-calendar"
+              >
+                <NavigateNextIcon />
+              </Fab>
+            </div>
           </div>
         </div>
       </React.Fragment>
