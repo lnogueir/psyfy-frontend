@@ -12,10 +12,7 @@ class ForgotPasswordForm extends React.Component {
             is_loading: false,
             show_error: false
         }
-    }
 
-    componentWillUnmount = () => {
-        Utils.Request.abortProcesses()
     }
 
     submitForgotPassword = e => {
@@ -27,7 +24,7 @@ class ForgotPasswordForm extends React.Component {
         setTimeout(() => {
             req.POST(endpoint, JSON.stringify({ email: target_email }))
                 .then(response => {
-                    if (response.status !== 200) {
+                    if (response.status != 200) {
                         this.setState({ is_loading: false, show_error: true })
                     }
                     else {

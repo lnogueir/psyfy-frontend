@@ -66,8 +66,8 @@ class OverviewTrailer extends React.Component {
         />
         <Card className="responsive-md-width" style={{ textAlign: "left" }}>
           <Card.Header as="h4">
-            <span>Trailer</span>
-            <GeneralEditIcon
+            Trailer
+                <GeneralEditIcon
               is_edit={this.state.is_edit}
               onClick={this.updateYoutubeVideo}
             />

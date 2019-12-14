@@ -57,7 +57,7 @@ class AboutTab extends React.Component {
               <b>Note:&nbsp;</b>
               These documents will NOT be exposed to the public and will be deleted as soon as
               the request account process has been completed.
-            </p>
+                  </p>
           </div>
         </div>
       </div>

@@ -9,8 +9,6 @@ import AutocompleteInput from '../../AutocompleteInput'
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 import EditPreviewCardOverlayTitle from './EditPreviewCardOverlayTitle'
 import Utils from '../../../assets/js/Utils'
-import { Link } from 'react-router-dom'
-import NumberFormat from 'react-number-format'
 
 class EditPreviewCardOverlayContactInfo extends React.Component {
   constructor(props) {
@@ -119,13 +117,11 @@ class EditPreviewCardOverlayContactInfo extends React.Component {
                 &nbsp;&nbsp;&nbsp;
                 <b>Phone</b>
               </Form.Label>
-              <NumberFormat
-                onChange={e => this.props.onFieldUpdate('phone_number', e.target.value)}
-                placeholder="123-456-7890"
-                value={this.props.fields.phone_number}
-                format="###-###-####"
-                className="form-control"
+              <Form.Control
                 name="phoneNumber"
+                onChange={e => this.props.onFieldUpdate('phone_number', e.target.value)}
+                placeholder="(123) 456 789"
+                value={this.props.fields.phone_number}
               />
             </Form.Group>
           </div>
@@ -143,11 +139,11 @@ class EditPreviewCardOverlayContactInfo extends React.Component {
                       placement={"top"}
                       trigger="manual"
                       overlay={
-                        <Tooltip style={{ zIndex: 10001 }}>
+                        <Tooltip>
                           <strong>Note:&nbsp;</strong>
                           This is your contact email,
                           if you would like to edit your login email
-                          go to <Link to={'/manage_credentials'}><a href="#">"Manage Credentials"</a></Link>.
+                          go to <a href="#">"Manage Credentials"</a>.
                         </Tooltip>
                       }
                     >

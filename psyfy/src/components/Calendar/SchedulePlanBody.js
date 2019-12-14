@@ -1,12 +1,17 @@
 /* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
 import React from 'react'
+import { MdDone } from 'react-icons/md'
 import { TiDelete } from 'react-icons/ti'
 import Utils from '../../assets/js/Utils'
 import $ from 'jquery'
 import { cellOnClick, updateNotes, setCommonSchedules, setCommonFreeBlocks } from '../../assets/js/calendar.js'
 
 class SchedulePlanBody extends React.Component {
+  constructor(props) {
+    super(props)
+  }
+
 
   handleMakeAvailableWeek = e => {
     e.preventDefault()
@@ -60,9 +65,7 @@ class SchedulePlanBody extends React.Component {
       .catch(err => alert(Utils.ERROR_MESSAGE + err))
   }
 
-  componentWillUnmount = () => {
-    Utils.Request.abortProcesses()
-  }
+
 
   handleMakeAvailable = e => {
     e.preventDefault()
@@ -296,9 +299,9 @@ class SchedulePlanBody extends React.Component {
               <h5><b>Schedule:</b></h5>
             </div>
             <div className="schedule-day">
-              {this.props.day && this.props.day.schedule.map((hour_block, i) => {
+              {this.props.day && this.props.day.schedule.map(hour_block => {
                 return (
-                  <div style={{ borderTop: i == 0 ? 'none' : '1px solid lightgray' }} className={`${!hour_block.is_available ? "" : "color-green"} justify-around schedule-row-active`}>
+                  <div className={`${!hour_block.is_available ? "" : "color-green"} justify-around schedule-row-active`}>
                     <div>
                       <b>{hour_block.start}</b>
                     </div>

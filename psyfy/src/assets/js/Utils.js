@@ -13,7 +13,7 @@ class Utils {
   }
 
   static isEmptyString(str) {
-    return typeof str === 'undefined' || str == null || str.trim() === '' || str === undefined
+    return str == null || str.trim() === '' || str == undefined
   }
 
 
@@ -209,7 +209,7 @@ class Utils {
       var req = new Utils.Request()
       const endpoint = '/site_users/checkTokenValidation'
       let response = await req.POST(endpoint, JSON.stringify({ "access_token": loggedUser.token }))
-      return response.status === 200
+      return response.status == 200
     }
     return false
   }

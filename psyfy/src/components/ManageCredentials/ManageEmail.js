@@ -24,9 +24,10 @@ const useStyles = makeStyles(theme => ({
     },
     current_email: {
         margin: theme.spacing(2),
-        padding: '8px 20px 8px 10px',
+        padding: '8px 20px 8px 20px',
         background: '#dcddde',
-        borderLeft: '12px solid navy',
+        borderLeft: '8px solid #124980',
+        borderRadius: '6px',
         fontSize: 'calc(13px + 0.5vw)',
         fontWeight: 700,
         boxShadow: '0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)'
@@ -98,6 +99,12 @@ function ManageEmail() {
                         <i>This action will log you out and permantly change your login email.</i>
                 </div>
                 <div className="mt20 mb20">
+                    <span className={classes.current_email}>
+                        Current Email:&nbsp;
+                        <i>lnogueir@uwaterloo.ca</i>
+                    </span>
+                    <br />
+                    <br />
                     <TextField
                         label="New Email"
                         className={classes.textField}
