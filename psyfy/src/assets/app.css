@@ -602,9 +602,32 @@ h1.panel-title{
   border-top:1px solid gray;
 }
 
-.scrollbox-terms-cond{
+.scrollbox-terms-cond-req{
   overflow-y: auto;
-  height: 14em;
+  height: 20em;
+  border-radius: .25em;
+  background: /* Shadow covers */
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+  radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background: /* Shadow covers */
+  linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
+  radial-gradient(farthest-side at 50% 0, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(farthest-side at 50% 100%, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
+  background-repeat: no-repeat;
+  background-color: white;
+  background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+  /* Opera doesn't support this in the shorthand */
+  background-attachment: local, local, scroll, scroll;
+}
+
+.scrollbox-terms-cond-foot{
+  overflow-y: auto;
+  height: 80vh;
+  width:50vw;
+  position:absolute;
+  left:50%;
+  transform:translate(-50%, -50%);
+  padding:15px;
+  border-radius: .25em;
   background: /* Shadow covers */
   linear-gradient(white 30%, rgba(255, 255, 255, 0)), linear-gradient(rgba(255, 255, 255, 0), white 70%) 0 100%, /* Shadows */
   radial-gradient(50% 0, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)), radial-gradient(50% 100%, farthest-side, rgba(0, 0, 0, .2), rgba(0, 0, 0, 0)) 0 100%;
@@ -636,7 +659,6 @@ h1.panel-title{
 
 .about-you-body:focus{
   outline: none;
-  border: 0.5px groove #ffcdd2;
   box-shadow:0px 0px 3px 4px lightgray;
 }
 
@@ -1338,9 +1360,11 @@ div.autocomplete-dropdown-container{
 }
 
 
-
-
-
+@media screen and (max-width: 870px){
+  .scrollbox-terms-cond-foot{
+    width:80vw;
+  }
+}
 @media screen and (max-width: 990px){
   .overview-trailer-wrap{
     margin-top:0px;
@@ -1601,6 +1625,16 @@ div.week-select .week-options-wrap .week-options:hover{
 
 .overlay-content-request{
   width:75vw;
+  max-height: 75vh;
+  position: relative;
+  left:50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.overlay-terms{
+  width:80vw;
   max-height: 75vh;
   position: relative;
   left:50%;
@@ -1910,6 +1944,14 @@ button.del-item-galery-icon:hover{
 @media screen and (max-width:575px){
   .schedule-plan-style{
     margin:5px 0px 0 0;
+  }
+
+  .overlay-content-request{
+    width:98%;
+  }
+
+  .overlay-content-preview{
+    width:98%;
   }
 
   .intro-buttons-wrap{
@@ -2437,7 +2479,8 @@ blockquote.footer-mission{
   padding:15px;
 }
 
-.manage-credentials-paper{
+div.manage-credentials-paper{
+  border-radius: .25em .25em .25em 50px;
   opacity:0.70;
   height:auto;
 }
@@ -2734,6 +2777,7 @@ div.home-deck-row{
   clip-path: circle(20% at 100% 100%);
   background: linear-gradient(90deg,#9fa8da, #9fa8da);
   bottom:0;
+  border-radius:.25em;
   z-index:-1;
 }
 .decoration-manage-credentials-left{
@@ -2743,6 +2787,7 @@ div.home-deck-row{
   clip-path: circle(30% at 70% 100%);
   background: linear-gradient(90deg, #ffcdd2,#ef9a9a);
   top:0;
+  border-radius:.25em;
   z-index:-1;
 }
 .decoration-manage-credentials-center{
@@ -2751,13 +2796,38 @@ div.home-deck-row{
   width:100%;
   clip-path: circle(10.0% at 100% 0%);
   background: linear-gradient(90deg, #ffcdd2,#ef9a9a);
+  border-radius:.25em;
   top:0;
   z-index:-1;
 }
 
+.manage-password-bg-lg{
+  position:absolute;
+  height:100%;
+  width:49%;
+  top:0;
+  opacity: 0.35;
+  z-index:-1;
+  border-radius: .25em 0 0 50px;
+  background:linear-gradient(90deg,#9fa8da, #ffcdd2);
+}
+
 .footer-links-responsive{
   text-align:center;
-  /* text-align: left;
-  position: relative;
-  left:5%; */
+}
+
+.closebtn{
+  font-size: 30px; 
+  color: #575757;
+}
+
+p.terms-and-conditions{
+  font-size: .9em;
+  line-height:25px;
+}
+
+p.terms-and-conditions > i {
+  font-size:.8em;
+  font-weight:600;
+  opacity:0.5;
 }

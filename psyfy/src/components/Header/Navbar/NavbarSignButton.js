@@ -53,7 +53,7 @@ class NavbarSignButton extends React.Component {
             Log in
               </a>
           <Button onClick={this.toggleRequest} style={{ height: '52px' }} variant="outline-light">
-            Request Account
+            Get Listed
           </Button>
         </div>
       </React.Fragment>
