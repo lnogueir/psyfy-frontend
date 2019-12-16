@@ -62,6 +62,7 @@ function ManagePasswordCard() {
                 <ManagePassword />
                 <ManageEmail />
             </div>
+            <div className="manage-password-bg-lg d-none d-lg-block"></div>
             <div className="decoration-manage-credentials-left d-lg-none"></div>
             <div className="decoration-manage-credentials-center d-none d-lg-block"></div>
             <div className="decoration-manage-credentials-right"></div>
