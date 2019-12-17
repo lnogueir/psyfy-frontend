@@ -2655,4 +2655,15 @@ div.home-deck-row{
   background: linear-gradient(90deg, #ffcdd2,#ef9a9a);
   top:0;
   z-index:-1;
+<<<<<<< HEAD
 }
+=======
+}
+
+.footer-links-responsive{
+  text-align:center;
+  /* text-align: left;
+  position: relative;
+  left:5%; */
+}
+>>>>>>> parent of 7a8eb74... terms and conditions updated and style changes

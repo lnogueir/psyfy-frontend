@@ -11,6 +11,7 @@ function Footer() {
     <footer className="bg-psyfy-footer page-footer mt60">
       <div className="container-fluid text-center font-small footer-borders">
         <div className="row">
+<<<<<<< HEAD
           <div className="col-sm-12 d-none d-sm-block d-md-none">
             <h5 className="text-bold-white">Our Mission:</h5>
             <blockquote className="footer-mission">
@@ -36,6 +37,32 @@ function Footer() {
                 <a className="link-footer-href" href="#!"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
               </li>
             </ul>
+=======
+          <div
+            className="col-sm-12 col-md-4 col-lg-4 footer-brand-wrap"
+          >
+            <img className="footer-brand" src={LOGO} />
+          </div>
+          <div className="col-sm-12 col-md-4 col-lg-4">
+            <h5 className="text-bold-white">Our Mission:</h5>
+            <blockquote className="footer-mission">
+              At PsyCare, we strive to find the best doctor out there to provide  secure, qualified and meaningful appointments to our patients.
+            </blockquote>
+          </div>
+          <div className="col-sm-12 col-md-4 col-lg-4 footer-links-responsive">
+            <h5 className="text-bold-white">Links:</h5>
+            <div className="links-footer">
+              <Link to={'/'}>
+                <a className="link-footer-href" href="#"><i><HomeIcon /></i>&nbsp;<span className="footer-link-txt">Home</span></a>
+              </Link>
+              <br />
+              <a className="link-footer-href" href="#!"><i><ContactSupportIcon /></i>&nbsp;<span className="footer-link-txt">Contact Us</span></a>
+              <br />
+              <a className="link-footer-href" href="#!"><i><LinkedInIcon /></i>&nbsp;<span className="footer-link-txt">LinkedIn</span></a>
+              <br />
+              <a className="link-footer-href" href="#!"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
+            </div>
+>>>>>>> parent of 7a8eb74... terms and conditions updated and style changes
           </div>
 
           <div className="col-md-4 col-lg-4 d-sm-none d-md-block d-lg-block">
