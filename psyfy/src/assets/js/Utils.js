@@ -12,37 +12,6 @@ class Utils {
     return null
   }
 
-  static validadeFileUpload(files) {
-    const extensionValidator = function validateFileExtension(extension) {
-      switch (extension) {
-        case 'pdf':
-        case 'jpeg':
-        case 'jpg':
-        case 'png':
-        case 'gif':
-        case 'doc':
-        case 'docx':
-        case 'ppt':
-        case 'pptx':
-        case 'tex':
-        case 'odt':
-        case 'rtf':
-        case 'wpd':
-          return true;
-        default:
-          return false;
-      }
-    }
-    const sizeValidator = function validateFileSize(size) { return size <= 2000000 }
-    files = Array.from(files)
-    return files.some(file => {
-      const file_extension = file.name.split('.').pop();
-      console.log(file_extension, file.size)
-      return sizeValidator(file.size) && extensionValidator(file_extension)
-    })
-
-  }
-
   static isEmptyString(str) {
     return typeof str === 'undefined' || str == null || str.trim() === '' || str === undefined
   }

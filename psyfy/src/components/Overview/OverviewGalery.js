@@ -58,7 +58,7 @@ class OverviewGalery extends React.Component {
   handleAddImage = event => {
     const file = event.target.files[0];
     Swal.fire({
-      title: 'New Image Description:',
+      title: 'Enter image description:',
       input: 'text',
       inputAttributes: {
         autocapitalize: 'on'

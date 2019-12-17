@@ -1,18 +1,12 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFileAlt } from '@fortawesome/free-solid-svg-icons'
+import { MdArrowForward } from 'react-icons/md'
 import DOCUMENT_FILL from '../../../assets/images/document_fill.png'
-import Utils from '../../../assets/js/Utils'
-import Alert from 'react-bootstrap/Alert'
 
 
 class AboutTab extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      show_error: false
-    }
-  }
 
   componentWillUnmount = () => {
     this.props.onChange('about', document.getElementById('req-about').innerHTML)
@@ -20,16 +14,6 @@ class AboutTab extends React.Component {
 
   componentDidMount = () => {
     document.getElementById('req-about').innerHTML = this.props.about
-  }
-
-  onFileChange = e => {
-    const new_files = e.target.files;
-    if (Utils.validadeFileUpload(new_files)) {
-      this.props.onChange('files', this.props.files.concat(Array.from(new_files)))
-      this.setState({ show_error: false })
-    } else {
-      this.setState({ show_error: true })
-    }
   }
 
   render() {
@@ -49,16 +33,16 @@ class AboutTab extends React.Component {
           </div>
           <div className="col-sm-12 col-md-12 col-lg-12">
             <p>
-              <b>Please</b> attach any files you think will be helpful for us to approve your account.
+              <b>Please</b> attach any files you think will be helpful for us approve your account.
               Such files could be proof of certification, degree and images of your office, for example.
-            </p>
+                    </p>
           </div>
-          <div className="mt10 mb20 col-sm-12 col-md-12 col-lg-12 justify-around flex-wrap">
+          <div className="mt10 mb20 col-sm-12 col-md-12 col-lg-12 justify-around">
             <div>
               <label id="file-dialog" className="cursor-pointer">
                 <FontAwesomeIcon id="file-icon" style={{ fontSize: 38 }} icon={faFileAlt} />
                 <img width={38} height={38} id="file-icon-as-image" src={DOCUMENT_FILL} />
-                <input multiple onClick={e => e.target.value = null} onChange={this.onFileChange} type="file" />
+                <input multiple onClick={e => e.target.value = null} onChange={e => this.props.onChange('files', this.props.files.concat(Array.from(e.target.files)))} type="file" />
                 <i>Attach</i>
               </label>
             </div>
@@ -68,13 +52,6 @@ class AboutTab extends React.Component {
               <div className="mt10 underline cursor-pointer"><b><i><span onClick={e => this.props.onChange('files', [])}>Clear</span></i></b></div>
             }
           </div>
-          {this.state.show_error &&
-            <div className="ml15 mr15">
-              <Alert variant={"danger"}>
-                <b>Sorry</b>, the file(s) you have just selected have been discarded due to invalid selection. Please make sure that uploaded files are <i>at most</i> <b>2MB</b> in size and its extensions are for documents or images.
-              </Alert>
-            </div>
-          }
           <div className="col-sm-12 col-md-12 col-lg-12 text-muted">
             <p>
               <b>Note:&nbsp;</b>

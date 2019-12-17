@@ -1,12 +1,23 @@
-import React from 'react';
+import React from 'react'
 import EditPreviewCardOverlayContactInfo from './EditPreviewCardOverlayContactInfo';
 import EditPreviewCardOverlayQualification from './EditPreviewCardOverlayQualification';
-import CloseOverlay from '../../CloseOverlay';
 
 function EditPreviewCardOverlay(props) {
   return (
     <div className="overlay-box-preview">
-      <CloseOverlay onClick={props.toggleDisplay} />
+      <div className="float-right" style={{ lineHeight: "30px" }}>
+        <a
+          href="#"
+          style={{ fontSize: 30, color: "#575757" }}
+          className="closebtn"
+          onClick={e => {
+            e.preventDefault()
+            props.toggleDisplay()
+          }}
+        >
+          &times;
+           </a>
+      </div>
       <div className="row align-text-left">
         <div className="col-xs-12 col-md-12 col-lg-12">
           <EditPreviewCardOverlayContactInfo

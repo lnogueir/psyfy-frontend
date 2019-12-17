@@ -16,7 +16,7 @@ function HomeIntro() {
         $('.home-right-side-wrap').css('height', 'auto')
         setIsSearch(true)
         setTimeout(() => {
-            const offset = window.innerWidth < 760 ? 555 : 579;
+            const offset = window.innerWidth < 760 ? 560 : 582.5;
             const scroll_amount = $("#search-card-ref").offset().top - offset;
             $('html, body').animate({
                 scrollTop: scroll_amount
@@ -38,7 +38,7 @@ function HomeIntro() {
 
     const scrollToContent = () => {
         $('html, body').animate({
-            scrollTop: 900
+            scrollTop: 700
         }, 1200);
     }
 
@@ -72,8 +72,8 @@ function HomeIntro() {
                     {
                         !isSearch &&
                         <div align="center" className="home-intro-search-opener animated fadeIn">
-                            <Fab onClick={onSearchClick} variant="extended" color="default">
-                                <SearchIcon />&nbsp;Search
+                            <Fab onClick={onSearchClick} color="default">
+                                <SearchIcon />
                             </Fab>
                         </div>
                     }

@@ -37,7 +37,7 @@ function HomeSearch() {
     }
 
     return (
-        <div className="home-search-wrap">
+        <div className="m40 mt10">
             <SweetAlert
                 show={showAlert}
                 type="info"
@@ -63,7 +63,7 @@ function HomeSearch() {
                         <i><EventNoteIcon /></i>
                         <b className="explore-label-home">What suits you best?</b>
                     </label>
-                    <div className="datetime-home-search-inputs">
+                    <div className="justify-center">
                         <MuiPickersUtilsProvider utils={DateFnsUtils}>
                             <KeyboardDatePicker
                                 margin="normal"
@@ -98,7 +98,7 @@ function HomeSearch() {
                         icon={<LocationOff style={{ opacity: 0.5, color: 'black' }} />}
                         checkedIcon={<LocationOn style={{ opacity: 0.85, color: 'black' }} />}
                     />
-                    <b>Use my current location</b>
+                    <b>Allow us to find the nearest doctors.</b>
                 </div>
                 <div align="center">
                     <button

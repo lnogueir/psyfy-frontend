@@ -1,4 +1,5 @@
 import React from 'react'
+import Card from 'react-bootstrap/Card'
 import WelcomeTab from './Tabs/WelcomeTab'
 import AboutTab from './Tabs/AboutTab'
 import TermsTab from './Tabs/TermsTab'
@@ -17,8 +18,7 @@ import ONE from '../../assets/images/one.png'
 import TWO from '../../assets/images/two.png'
 import THREE from '../../assets/images/three.png'
 import FOUR from '../../assets/images/four.png'
-import Paper from '@material-ui/core/Paper'
-import CloseOverlay from '../CloseOverlay'
+import Paper from '@material-ui/core/Paper';
 
 class RequestAccountCard extends React.Component {
   constructor(props) {
@@ -167,9 +167,6 @@ class RequestAccountCard extends React.Component {
           onConfirm={this.handleSuccess}
         />
         <Paper className="req-card shadow">
-          <div className="position-relative" style={{ top: 10, right: 10 }}>
-            <CloseOverlay onClick={this.props.toggleDisplay} />
-          </div>
           <div className="d-flex">
             <div className="left-side-req-card">
               <div className="flex-column req-tabs">
@@ -227,7 +224,7 @@ class RequestAccountCard extends React.Component {
                     <React.Fragment>
                       {this.state.show_error &&
                         <Alert className="mt20" variant={"danger"}>
-                          Sorry, you <b>must accept</b> the Terms Of Service and <b>fill</b> all the entries on <b>Contact Info</b> tab.
+                          Sorry, you <b>must accept</b> the Terms & Conditions and <b>fill</b> all the entries on <b>Contact Info</b> tab.
                         </Alert>
                       }
                       <button className="logbtn mt10" onClick={this.performRequestAccount}>

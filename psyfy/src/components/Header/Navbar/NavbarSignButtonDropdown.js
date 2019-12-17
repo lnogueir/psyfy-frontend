@@ -15,7 +15,7 @@ function NavbarSignButtonDropdown(props) {
                 <div className="dropdown-divider"></div>
                 <a href="#" className="dropdown-item" onClick={props.showLoginCard}>Login</a>
                 <a href="#" className="dropdown-item" onClick={props.showRequestCard}>
-                    Get Listed
+                    Request Account
                 </a>
             </div>
         </div>
