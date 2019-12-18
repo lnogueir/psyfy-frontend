@@ -3,7 +3,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 
 
 class AutocompleteInput extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
 
   }
@@ -13,13 +13,13 @@ class AutocompleteInput extends React.Component {
   }
 
 
-  render(){
-      return (
-        <PlacesAutocomplete
-          value={this.props.address}
-          onSelect={this.handleChange}
-          onChange={this.handleChange}
-        >
+  render() {
+    return (
+      <PlacesAutocomplete
+        value={this.props.address}
+        onSelect={this.handleChange}
+        onChange={this.handleChange}
+      >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
           <div>
             <input
@@ -27,22 +27,18 @@ class AutocompleteInput extends React.Component {
               type="text"
               value={this.props.address}
               className={this.props.className}
-              {...getInputProps({ placeholder:"Clinic Location" })}
+              {...getInputProps({ placeholder: "Clinic Location" })}
             />
-            <div className={`autocomplete-dropdown-container${suggestions.length===0?" hidden":""}`}>
+            <div className={`autocomplete-dropdown-container${suggestions.length === 0 ? " hidden" : ""}`}>
               {loading && <div>Loading...</div>}
               {suggestions.map(suggestion => {
                 const className = suggestion.active
-                  ? 'suggestion-item--active'
-                  : 'suggestion-item';
-                const style = suggestion.active
-                  ? { backgroundColor: '#cde9f7', cursor: 'pointer', padding:10 }
-                  : { backgroundColor: '#ffffff', cursor: 'pointer' };
+                  ? 'suggestion-item-auto-complete--active'
+                  : 'suggestion-item-auto-complete';
                 return (
                   <div
                     {...getSuggestionItemProps(suggestion, {
-                      className,
-                      style,
+                      className
                     })}
                   >
                     <span>{suggestion.description}</span>
@@ -52,8 +48,8 @@ class AutocompleteInput extends React.Component {
             </div>
           </div>
         )}
-        </PlacesAutocomplete>
-      )
+      </PlacesAutocomplete>
+    )
   }
 
 }

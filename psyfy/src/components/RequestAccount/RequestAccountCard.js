@@ -89,7 +89,7 @@ class RequestAccountCard extends React.Component {
           req.POST(endpoint, form)
             .then(response => {
               if (response.status === 200) {
-                this.setState({ is_loading: false, show_success: true })
+                this.setState({ is_loading: false, show_success: true, show_error: false })
               }
             }).catch(err => {
               this.setState({ is_loading: false })
@@ -160,10 +160,18 @@ class RequestAccountCard extends React.Component {
       <React.Fragment>
         <SweetAlert show={this.state.show_success}
           title="Order processed!"
-          html={`Our staff is working on the approval of your account!<br/>An email will be sent to you within 24 hours with the response to your request.<br/>If you don't recieve an email by then, please contact us @ email, and we will sort it out. Have a wonderful day!`}
+          html={`
+            <div align="left">
+              <p style="padding-left:7.5px">
+                Our staff is working on the approval of your account!<br/>
+                An email will be sent to you within 24 hours with the response to your request.<br/>
+                If you don't recieve an email by then, please contact us @ email.
+              </p> 
+            </div>
+            `}
           type='success'
           showCancelButton={false}
-          confirmButtonColor="#9645ff"
+          confirmButtonColor="#c5cae9"
           onConfirm={this.handleSuccess}
         />
         <Paper className="req-card shadow">
