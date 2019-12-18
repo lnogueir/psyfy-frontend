@@ -6,9 +6,10 @@ import OverviewPage from './components/Overview/OverviewPage'
 import HomePage from './components/Home/HomePage'
 import CalendarPage from './components/Calendar/CalendarPage'
 import ManageCredentialsPage from './components/ManageCredentials/ManageCredentialsPage'
-import './assets/app.css'
 import ResetPasswordPage from './components/ResetPasswordPage'
 import NotFoundPage from './components/NotFoundPage'
+import './assets/app.css'
+import 'aos/dist/aos.css'
 
 
 

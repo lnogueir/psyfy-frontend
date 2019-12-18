@@ -13,7 +13,7 @@ class Header extends React.Component {
 
   render() {
     return (
-      <div className="fixed-top">
+      <div style={{ zIndex: 900 }} className="fixed-top">
         {
           window.localStorage.getItem('loggedUser') === null
             &&

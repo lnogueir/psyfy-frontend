@@ -1,5 +1,6 @@
 import React from 'react';
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
+import FacebookIcon from '@material-ui/icons/Facebook';
 import InfoIcon from '@material-ui/icons/Info';
 import HomeIcon from '@material-ui/icons/Home';
 import ContactSupportIcon from '@material-ui/icons/ContactSupport';
@@ -56,13 +57,14 @@ function Footer() {
                 <a className="link-footer-href" href="#" onClick={onTermsClick}><i><InfoIcon /></i>&nbsp;<span className="footer-link-txt">Terms Of Service</span></a>
                 <br />
                 <a className="link-footer-href" href="#!"><i><LinkedInIcon /></i>&nbsp;<span className="footer-link-txt">LinkedIn</span></a>
+                <br />
+                <a className="link-footer-href" href="#!"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
               </div>
             </div>
           </div>
         </div>
         <div className="footer-copyright text-center py-3">
           <span className="text-bold-white"><span style={{ fontWeight: 500 }}>© 2019 | </span>PsyCare</span>
-
         </div>
       </footer>
     </React.Fragment>
