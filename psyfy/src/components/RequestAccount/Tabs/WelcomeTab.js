@@ -3,7 +3,7 @@ import React from 'react'
 function WelcomeTab(props) {
   return (
     <div align="left">
-      <h1 className="req-tab-title">Welcome to Jawy!!</h1>
+      <h1 className="req-tab-title">Welcome to PsyCare</h1>
       <p>Welcome to PsyCare! We are very happy to know you are interested in joining us.</p>
       <p>In order to get your account, we must first make sure you are a certified doctor.</p>
       <p>

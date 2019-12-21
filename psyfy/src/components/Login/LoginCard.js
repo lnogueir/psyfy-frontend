@@ -40,9 +40,10 @@ class LoginCard extends React.Component {
           <ForgotPasswordForm updateState={this.updateState} />
         }
         <div className="mt40" >
-          <Card.Footer className="bg-transparent text-muted">
-            Are you a doctor?&nbsp;
-              <a
+          <Card.Footer className="text-muted justify-center flex-wrap m5">
+            <span className="ml5">Are you a doctor?</span>
+            <a
+              className="ml5"
               href="#"
               onClick={e => {
                 e.preventDefault()

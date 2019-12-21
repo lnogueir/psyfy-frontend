@@ -6,7 +6,7 @@ function NavbarBrand() {
   return (
     <Link to={'/'}>
       <a className="navbar-brand" href="#">
-        <img width="220" src={LOGO} />
+        <img src={LOGO} />
       </a>
     </Link>
   )

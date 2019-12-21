@@ -70,18 +70,18 @@ class LoginForm extends React.Component {
             <Form onSubmit={this.handleLogin}>
                 <div style={{ textAlign: "center" }}>
                     <Form.Group controlId="formBasicEmail">
-                        <div className="mb-3">
+                        <div className="position-relative mb-3">
                             <i className="login-input-icon" ><FaUserMd /></i>
                             <input type="text" name="loginEmail" className="login-input" placeholder="Login Email" />
                         </div>
                     </Form.Group>
                     <Form.Group className="mt30" controlId="formBasicPassword">
-                        <div className="mb-3">
+                        <div className="position-relative mb-3">
                             <i className="login-input-icon" ><FaLock /></i>
                             <input type="password" name="password" className="login-input" placeholder="Password" />
                         </div>
                     </Form.Group>
-                    <div className="justify-around">
+                    <div className="justify-around flex-wrap">
                         <Form.Group controlId="formBasicCheckbox">
                             <Form.Check type="checkbox" name="keepLoggedIn" label="Keep me logged in" />
                         </Form.Group>

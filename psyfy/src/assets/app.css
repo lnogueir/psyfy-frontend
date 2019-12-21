@@ -344,6 +344,7 @@ img.footer-brand{
 
 .navbar-brand > img{
   opacity:0.8;
+  width:calc(200px + 1vw);
 }
 
 div.links-footer{
@@ -1958,6 +1959,10 @@ button.del-item-galery-icon:hover{
 @media screen and (max-width:540px){
   section.adv-cards-section{
     margin-top:40px;
+  }
+
+  .navbar-brand > img{
+    width:180px;
   }
 
   button.home-intro-search-closer{

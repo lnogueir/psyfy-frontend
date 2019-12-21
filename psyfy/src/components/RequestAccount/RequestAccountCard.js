@@ -34,6 +34,7 @@ class RequestAccountCard extends React.Component {
       files: [],
       accepted_terms: false,
       show_error: false,
+      show_error_already_exist: false,
       is_loading: false,
       is_menu_open: false
     }
@@ -64,6 +65,7 @@ class RequestAccountCard extends React.Component {
       !Utils.isEmptyString(this.state.number) &&
       !Utils.isEmptyString(this.state.email) &&
       !Utils.isEmptyString(this.state.address) &&
+      Utils.isValidEmail(this.state.email) &&
       this.state.accepted_terms
     )
   }
@@ -75,7 +77,7 @@ class RequestAccountCard extends React.Component {
       this.state.files.forEach(file => form.append('files', file))
       form.append('full_name', this.state.name)
       form.append('phone_number', this.state.number)
-      form.append('email', this.state.email)
+      form.append('email', this.state.email.toLowerCase())
       form.append('address', this.state.address)
       form.append('about', this.state.about)
       geocodeByAddress(this.state.address)
@@ -89,7 +91,27 @@ class RequestAccountCard extends React.Component {
           req.POST(endpoint, form)
             .then(response => {
               if (response.status === 200) {
-                this.setState({ is_loading: false, show_success: true, show_error: false })
+                this.setState({
+                  is_loading: false,
+                  show_success: true,
+                  show_error: false,
+                  show_error_already_exist: false
+                })
+              } else if (response.error && response.error.code === 'ALREADY_REQUESTED_ACCOUNT') {
+                this.setState({
+                  is_loading: false,
+                  show_success: false,
+                  show_error: false,
+                  show_error_already_exist: true
+                })
+              } else {
+                this.setState({
+                  is_loading: false,
+                  show_success: false,
+                  show_error: false,
+                  show_error_already_exist: false
+                })
+                alert(Utils.ERROR_MESSAGE + ' status: ' + response.status)
               }
             }).catch(err => {
               this.setState({ is_loading: false })
@@ -101,7 +123,12 @@ class RequestAccountCard extends React.Component {
           alert(Utils.ERROR_MESSAGE + err)
         })
     } else {
-      this.setState({ show_error: true })
+      this.setState({
+        is_loading: false,
+        show_success: false,
+        show_error: true,
+        show_error_already_exist: false
+      })
     }
   }
 
@@ -235,7 +262,14 @@ class RequestAccountCard extends React.Component {
                     <React.Fragment>
                       {this.state.show_error &&
                         <Alert className="mt20" variant={"danger"}>
-                          Sorry, you <b>must accept</b> the Terms Of Service and <b>fill</b> all the entries on <b>Contact Info</b> tab.
+                          Sorry, you <b>must accept</b> the Terms Of Service, <b>fill</b> all the entries on <b>Contact Info</b> tab and provide a <b>valid</b> email address.
+                        </Alert>
+                      }
+                      {
+                        this.state.show_error_already_exist &&
+                        <Alert className="mt20" variant={"danger"}>
+                          There is already an account request for this email being processed at the time.
+                          If you've already requested an account with this email, a response will be sent to you shortly.
                         </Alert>
                       }
                       <button className="logbtn mt10" onClick={this.performRequestAccount}>
