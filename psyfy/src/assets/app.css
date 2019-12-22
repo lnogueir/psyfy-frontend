@@ -92,6 +92,17 @@ body {
 
  /* END STYLE LESS THAN MD SIZE BS */
 
+@media only screen and (min-width: 1200px){
+  section.home-page-section{
+    height:90vh;
+  }
+  div.main-home-m-top-lg{
+    position:relative;
+    top:7.5%;
+  }
+}
+
+
 .home-page-section{
     height:auto;
     margin-bottom:25px;

@@ -48,7 +48,7 @@ function TermsAndConditions() {
             <br /><br />
             <b>Contact Us:</b>
             <br />
-            If you have any questions about these Terms, please contact us on OUREMAIL@DOMAIN.
+            If you have any questions about these Terms, please contact us at <a href="mailto: info@psycare.ca">info@psycare.ca</a>.
           </p>
     )
 }
