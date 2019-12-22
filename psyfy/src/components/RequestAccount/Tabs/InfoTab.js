@@ -59,7 +59,7 @@ function InfoTab(props) {
         <br />
         <b>Note:&nbsp;</b>if you are a <i>*Beta tester</i> you may skip the next tab as we are aware of your experience and certifications.
         <br />
-        * You are considered a Beta tester if you've received an invitation via email from @OUREMAILDOMAIN to become a beta tester.
+        * You are considered a Beta tester if you've received an invitation via email from <a href="mailto: info@psycare.ca">info@psycare.ca</a> to become a beta tester.
       </p>
     </div>
   )

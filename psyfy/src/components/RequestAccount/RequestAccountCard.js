@@ -35,6 +35,7 @@ class RequestAccountCard extends React.Component {
       accepted_terms: false,
       show_error: false,
       show_error_already_exist: false,
+      show_error_not_sent: false,
       is_loading: false,
       is_menu_open: false
     }
@@ -95,21 +96,34 @@ class RequestAccountCard extends React.Component {
                   is_loading: false,
                   show_success: true,
                   show_error: false,
-                  show_error_already_exist: false
+                  show_error_already_exist: false,
+                  show_error_not_sent: false
                 })
-              } else if (response.error && response.error.code === 'ALREADY_REQUESTED_ACCOUNT') {
-                this.setState({
-                  is_loading: false,
-                  show_success: false,
-                  show_error: false,
-                  show_error_already_exist: true
-                })
+              } else if (response.error) {
+                if (response.error.code === 'ALREADY_REQUESTED_ACCOUNT') {
+                  this.setState({
+                    is_loading: false,
+                    show_success: false,
+                    show_error: false,
+                    show_error_already_exist: true,
+                    show_error_not_sent: false
+                  })
+                } else if (response.error.code === 'EMAIL_CANT_BE_SENT') {
+                  this.setState({
+                    is_loading: false,
+                    show_success: false,
+                    show_error: false,
+                    show_error_already_exist: false,
+                    show_error_not_sent: true
+                  })
+                }
               } else {
                 this.setState({
                   is_loading: false,
                   show_success: false,
                   show_error: false,
-                  show_error_already_exist: false
+                  show_error_already_exist: false,
+                  show_error_not_sent: false
                 })
                 alert(Utils.ERROR_MESSAGE + ' status: ' + response.status)
               }
@@ -127,6 +141,7 @@ class RequestAccountCard extends React.Component {
         is_loading: false,
         show_success: false,
         show_error: true,
+        show_error_not_sent: false,
         show_error_already_exist: false
       })
     }
@@ -270,6 +285,12 @@ class RequestAccountCard extends React.Component {
                         <Alert className="mt20" variant={"danger"}>
                           There is already an account request for this email being processed at the time.
                           If you've already requested an account with this email, a response will be sent to you shortly.
+                        </Alert>
+                      }
+                      {
+                        this.state.show_error_not_sent &&
+                        <Alert className="mt20" variante={"danger"}>
+                          Sorry, an error occurred while processing your request. Our team has been notified about this and is working on the issue. Please submit a request later or contact us at <a href="mailto: info@psycare.ca">info@psycare.ca</a>.
                         </Alert>
                       }
                       <button className="logbtn mt10" onClick={this.performRequestAccount}>

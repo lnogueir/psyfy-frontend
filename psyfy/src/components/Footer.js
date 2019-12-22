@@ -52,13 +52,13 @@ function Footer() {
                   <a className="link-footer-href" href="#"><i><HomeIcon /></i>&nbsp;<span className="footer-link-txt">Home</span></a>
                 </Link>
                 <br />
-                <a className="link-footer-href" href="#!"><i><ContactSupportIcon /></i>&nbsp;<span className="footer-link-txt">Contact Us</span></a>
+                <a className="link-footer-href" href="mailto: info@psycare.ca"><i><ContactSupportIcon /></i>&nbsp;<span className="footer-link-txt">Contact Us</span></a>
                 <br />
                 <a className="link-footer-href" href="#" onClick={onTermsClick}><i><InfoIcon /></i>&nbsp;<span className="footer-link-txt">Terms Of Service</span></a>
                 <br />
-                <a className="link-footer-href" href="#!"><i><LinkedInIcon /></i>&nbsp;<span className="footer-link-txt">LinkedIn</span></a>
+                <a className="link-footer-href" href="#"><i><LinkedInIcon /></i>&nbsp;<span className="footer-link-txt">LinkedIn</span></a>
                 <br />
-                <a className="link-footer-href" href="#!"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
+                <a className="link-footer-href" href="https://fb.me/psycareorg"><i><FacebookIcon /></i>&nbsp;<span className="footer-link-txt">Facebook</span></a>
               </div>
             </div>
           </div>
