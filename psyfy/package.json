@@ -16,7 +16,7 @@
     "env-cmd": "^10.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.18.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "material-ui-popup-state": "^1.4.1",
     "pretty-checkbox": "^3.0.3",
     "pretty-checkbox-react": "^1.1.0",
